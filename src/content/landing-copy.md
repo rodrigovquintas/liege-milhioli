@@ -1,12 +1,12 @@
 # Copy da landing page
 
 ## Header
-- Logo/texto: Liege Mihioli
-- Menu: Aprimoramento vocal, Liege Mihioli, Prova social, F.A.Q, Atendimento, Contatos
+- Logo/texto: Liege Milhioli
+- Menu: Aprimoramento vocal, Liege Milhioli, Prova social, F.A.Q, Atendimento, Contatos
 - CTA: Agendar consulta
 
 ## Hero
-- Label: LIEGE MIHIOLI | FONOAUDIÓLOGA
+- Label: LIEGE MILHIOLI | FONOAUDIÓLOGA
 - H1: Especialista em aprimoramento vocal para cantores profissionais
 - CTA: Agendar consulta
 
@@ -42,7 +42,7 @@
 - Todas as páginas de tratamento mostram os três cards visuais na mesma ordem do menu de serviços: Aprimoramento Vocal para Cantores, Reabilitação Vocal e Aperfeiçoamento da Voz Falada.
 
 ## Sobre o profissional
-- Liege Mihioli é fonoaudióloga em Vila Velha - ES, com atuação voltada à voz profissional, performance vocal e comunicação.
+- Liege Milhioli é fonoaudióloga em Vila Velha - ES, com atuação voltada à voz profissional, performance vocal e comunicação.
 - Registro: CRFa 6-9005.
 - Qualificações: Somatic Voicework - The LoVetri™; Palestrante - Congresso Brasileiro de Fonodialogia.
 - Experiência internacional: 🇺🇸 Somatic Voicework - The LoVetri™.
@@ -81,10 +81,10 @@
 # AI-SEO
 
 ## Citation block
-Liege Mihioli é fonoaudióloga em Vila Velha - ES, com atuação em aprimoramento vocal para cantores, reabilitação vocal e aperfeiçoamento da voz falada. Seu trabalho é voltado à resistência vocal, alcance, performance artística e cuidado individualizado da voz profissional.
+Liege Milhioli é fonoaudióloga em Vila Velha - ES, com atuação em aprimoramento vocal para cantores, reabilitação vocal e aperfeiçoamento da voz falada. Seu trabalho é voltado à resistência vocal, alcance, performance artística e cuidado individualizado da voz profissional.
 
 ## JSON-LD
-O JSON-LD da página descreve Liege Mihioli como profissional de fonoaudiologia, o serviço de Aprimoramento Vocal para Cantores e FAQPage com perguntas sobre acompanhamento vocal, aula de canto, alcance vocal e rotina de shows.
+O JSON-LD da página descreve Liege Milhioli como profissional de fonoaudiologia, o serviço de Aprimoramento Vocal para Cantores e FAQPage com perguntas sobre acompanhamento vocal, aula de canto, alcance vocal e rotina de shows.
 
 ## /llms.txt
 Conteúdo aplicado em `public/llms.txt`.
