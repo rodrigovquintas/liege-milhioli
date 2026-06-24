@@ -1,0 +1,889 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { services } from '../content/services';
+
+const title = 'Links | Liege Mihioli';
+const description = 'Canais oficiais de contato, endereço e conteúdos de Liege Mihioli em português, inglês e espanhol.';
+
+const PHONE_LINK = 'tel:+5527981187879';
+const MAP_LINK = 'https://www.google.com/maps?cid=12925205516975630672';
+const WAZE_LINK = 'https://waze.com/ul/h7h7k74p5s';
+const UBER_LINK = 'https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=-20.335071&dropoff[longitude]=-40.288045&dropoff[nickname]=Liege%20Mihioli';
+const INSTAGRAM_LINK = 'https://www.instagram.com/liegemilhioli/reels/';
+const YOUTUBE_LINK = 'https://www.youtube.com/@liegemilhioli1869';
+
+const languages = [
+  { code: 'pt', label: 'Português', short: 'PT', flag: '🇧🇷' },
+  { code: 'en', label: 'English', short: 'EN', flag: '🇺🇸' },
+  { code: 'es', label: 'Español', short: 'ES', flag: '🇪🇸' },
+];
+
+const content = {
+  pt: {
+    crm: 'CRFa 6-9005',
+    name: 'Liege Mihioli',
+    specialty: 'Fonoaudióloga',
+    heading: 'Fonoaudiologia avançada',
+    intro: 'Acompanhamento especializado para:',
+    introItems: ['Palestrantes', 'Cantores profissionais'],
+    contacts: 'CONTATOS',
+    whatsapp: 'WhatsApp',
+    call: 'Ligação',
+    address: 'Endereço - Vila Velha',
+    addressWaze: 'Endereço - Waze',
+    addressUber: 'Endereço - Uber',
+    seeMore: 'VEJA MAIS',
+    website: 'Website',
+    social: 'Nos acompanhe nas REDES SOCIAIS',
+    wa: '/whatsapp-instagram',
+  },
+  en: {
+    crm: 'CRFa 6-9005',
+    name: 'Liege Mihioli',
+    specialty: 'Speech therapist',
+    heading: 'Advanced speech therapy',
+    intro: 'Specialized support for:',
+    introItems: ['Speakers', 'Professional singers'],
+    contacts: 'CONTACTS',
+    whatsapp: 'WhatsApp',
+    call: 'Call',
+    address: 'Address - Vila Velha',
+    addressWaze: 'Address - Waze',
+    addressUber: 'Address - Uber',
+    seeMore: 'SEE MORE',
+    website: 'Website',
+    social: 'Follow us on SOCIAL MEDIA',
+    wa: '/whatsapp-instagram-en',
+  },
+  es: {
+    crm: 'CRFa 6-9005',
+    name: 'Liege Mihioli',
+    specialty: 'Fonoaudióloga',
+    heading: 'Fonoaudiología avanzada',
+    intro: 'Acompañamiento especializado para:',
+    introItems: ['Conferencistas', 'Cantantes profesionales'],
+    contacts: 'CONTACTOS',
+    whatsapp: 'WhatsApp',
+    call: 'Llamada',
+    address: 'Dirección - Vila Velha',
+    addressWaze: 'Dirección - Waze',
+    addressUber: 'Dirección - Uber',
+    seeMore: 'VER MÁS',
+    website: 'Sitio web',
+    social: 'Síguenos en REDES SOCIALES',
+    wa: '/whatsapp-instagram-es',
+  },
+};
+
+const address = 'R. Prof. Telmo de Souza Torres, 255 - Praia da Costa, Vila Velha - ES, 29100-260';
+const treatmentLabels = {
+  pt: {
+    'aprimoramento-vocal': 'Aprimoramento vocal para cantores',
+    'reabilitacao-vocal': 'Reabilitação vocal',
+    'voz-falada': 'Aperfeiçoamento da voz falada',
+  },
+  en: {
+    'aprimoramento-vocal': 'Vocal improvement for singers',
+    'reabilitacao-vocal': 'Vocal rehabilitation',
+    'voz-falada': 'Spoken voice improvement',
+  },
+  es: {
+    'aprimoramento-vocal': 'Perfeccionamiento vocal para cantantes',
+    'reabilitacao-vocal': 'Rehabilitación vocal',
+    'voz-falada': 'Perfeccionamiento de la voz hablada',
+  },
+} as const;
+
+---
+
+<Layout title={title} description={description} theme="dark">
+  <main class="links-page">
+    <section class="links-shell" aria-labelledby="language-title">
+      <div class="language-panel" data-language-panel data-section="links-language">
+        <h1 id="language-title" data-element="1" data-element-name="title">Language</h1>
+        <div class="language-actions" aria-label="Seleção de idioma">
+          {languages.map((language, index) => (
+            <button
+              class="language-button"
+              type="button"
+              data-language-button={language.code}
+              aria-controls={`links-content-${language.code}`}
+              data-element={String(index + 2)}
+              data-element-name={`language-${language.code}`}
+            >
+              <span class="flag" aria-hidden="true">{language.flag}</span>
+              <span>{language.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {Object.entries(content).map(([code, item]) => (
+        <article class="links-profile" id={`links-content-${code}`} data-language-content={code} data-section="links-profile" hidden>
+          <div class="profile-header">
+            <img
+              class="profile-photo"
+              src="/images/liege-credentials.webp"
+              alt="Liege Mihioli"
+              width="288"
+              height="362"
+              loading="eager"
+              data-element="2"
+              data-element-name="photo"
+            />
+
+            <div class="profile-header-copy">
+              <p class="profile-crm" data-element="3" data-element-name="crm">{item.crm}</p>
+              <h2 data-element="4" data-element-name="name">{item.name}</h2>
+              <p class="profile-specialty" data-element="5" data-element-name="specialty">{item.specialty}</p>
+            </div>
+
+            <div class="profile-language" data-element="1" data-element-name="language-selector">
+              <button
+                class="profile-language-toggle"
+                type="button"
+                data-language-menu-toggle={code}
+                aria-expanded="false"
+                aria-controls={`language-menu-${code}`}
+              >
+                <span class="profile-language-flag" aria-hidden="true">
+                  {languages.find((language) => language.code === code)?.flag}
+                </span>
+                {languages.find((language) => language.code === code)?.short}
+                <Icon name="chevron-down" size={18} />
+              </button>
+              <div class="profile-language-menu" id={`language-menu-${code}`} data-language-menu hidden>
+                {languages.map((language) => (
+                  <button type="button" data-language-button={language.code}>
+                    <span class="flag" aria-hidden="true">{language.flag}</span>
+                    <span>{language.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <h3 data-element="6" data-element-name="title">{item.heading}</h3>
+          <p class="profile-intro" data-element="7" data-element-name="intro">
+            <span>{item.intro}</span>
+            <span class="profile-intro-list">
+              {item.introItems.map((introItem) => (
+                <span class="profile-intro-item">{introItem}</span>
+              ))}
+            </span>
+          </p>
+
+          <div class="links-group" aria-label={item.contacts}>
+            <p class="links-group-title" data-element="8" data-element-name="contacts-title">{item.contacts}</p>
+            <a class="link-card" href={item.wa} data-element="9" data-element-name="whatsapp">
+              <Icon name="whatsapp" size={21} />
+              <span>{item.whatsapp}</span>
+            </a>
+            <p class="links-group-title" data-element="10" data-element-name="address-title">Endereço</p>
+            <div class="address-actions">
+              <a class="link-card address-card" href={MAP_LINK} target="_blank" rel="noopener noreferrer" data-element="11" data-element-name="address-google">
+                <Icon name="map" size={21} />
+                <span>Google</span>
+              </a>
+              <a class="link-card address-card" href={WAZE_LINK} target="_blank" rel="noopener noreferrer" data-element="12" data-element-name="address-waze">
+                <Icon name="waze" size={21} />
+                <span>Waze</span>
+              </a>
+              <a class="link-card address-card" href={UBER_LINK} target="_blank" rel="noopener noreferrer" data-element="13" data-element-name="address-uber">
+                <Icon name="uber" size={21} />
+                <span>Uber</span>
+              </a>
+            </div>
+          </div>
+
+          <p class="address-note" data-element="14" data-element-name="address-writed">{address}</p>
+
+          <div class="links-group" aria-label={item.seeMore}>
+            <p class="links-group-title" data-element="15" data-element-name="more-title">{item.seeMore}</p>
+            {services.map((service, index) => (
+              <a
+                class="link-card"
+                href={service.path}
+                data-landing-link
+                data-element={String(index + 16)}
+                data-element-name={`treatment-${service.slug}`}
+              >
+                <Icon name="arrow-up-right" size={21} />
+                <span>{treatmentLabels[code][service.slug]}</span>
+              </a>
+            ))}
+          </div>
+
+          <div class="social-block">
+            <p data-element="19" data-element-name="social-title">{item.social}</p>
+            <div class="social-links">
+              <a href={INSTAGRAM_LINK} target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-element="20" data-element-name="instagram">
+                <Icon name="instagram" size={25} />
+              </a>
+              <a href={YOUTUBE_LINK} target="_blank" rel="noopener noreferrer" aria-label="YouTube" data-element="22" data-element-name="youtube">
+                <Icon name="youtube" size={27} />
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </section>
+  </main>
+
+  <script>
+    const languagePanel = document.querySelector('[data-language-panel]');
+    const languageContents = Array.from(document.querySelectorAll('[data-language-content]'));
+    const languageButtons = Array.from(document.querySelectorAll('[data-language-button]'));
+    const languageMenus = Array.from(document.querySelectorAll('[data-language-menu]'));
+    const languageMenuToggles = Array.from(document.querySelectorAll('[data-language-menu-toggle]'));
+
+    const selectLanguage = (language: string) => {
+      languagePanel?.setAttribute('hidden', '');
+      window.localStorage.setItem('landingLanguage', language);
+
+      const url = new URL(window.location.href);
+      url.searchParams.set('lang', language);
+      window.history.replaceState({}, '', url);
+
+      languageContents.forEach((content) => {
+        const isSelected = (content as HTMLElement).dataset.languageContent === language;
+        content.toggleAttribute('hidden', !isSelected);
+      });
+
+      languageButtons.forEach((button) => {
+        const isSelected = (button as HTMLElement).dataset.languageButton === language;
+        button.setAttribute('aria-pressed', String(isSelected));
+      });
+
+      languageMenus.forEach((menu) => menu.setAttribute('hidden', ''));
+      languageMenuToggles.forEach((button) => button.setAttribute('aria-expanded', 'false'));
+      document.querySelectorAll<HTMLAnchorElement>('[data-landing-link]').forEach((link) => {
+        const target = new URL(link.getAttribute('href') || '/', window.location.origin);
+        target.searchParams.set('lang', language);
+        link.href = `${target.pathname}${target.search}${target.hash}`;
+      });
+      window.dispatchEvent(new Event('resize'));
+    };
+
+    languageButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const language = (button as HTMLElement).dataset.languageButton;
+        if (language) selectLanguage(language);
+      });
+    });
+
+    languageMenuToggles.forEach((button) => {
+      button.addEventListener('click', () => {
+        const menu = button.nextElementSibling;
+        const isOpen = menu?.hasAttribute('hidden') === false;
+
+        languageMenus.forEach((item) => item.setAttribute('hidden', ''));
+        languageMenuToggles.forEach((item) => item.setAttribute('aria-expanded', 'false'));
+
+        if (!isOpen && menu) {
+          menu.removeAttribute('hidden');
+          button.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const initialLanguage = params.get('lang') || window.localStorage.getItem('landingLanguage');
+    if (initialLanguage && ['pt', 'en', 'es'].includes(initialLanguage)) {
+      selectLanguage(initialLanguage);
+    }
+  </script>
+</Layout>
+
+<style>
+  .links-page {
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #151515 url('/images/links-background.webp') center center / cover fixed no-repeat;
+    color: #EDEDED;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .links-page::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      linear-gradient(90deg, rgba(12, 12, 12, 0.22), rgba(12, 12, 12, 0.34) 42%, rgba(12, 12, 12, 0.24)),
+      rgba(0, 0, 0, 0.08);
+    pointer-events: none;
+  }
+
+  .links-shell {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    width: min(100%, 62rem);
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding: var(--section-space-sm) var(--container-inline);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .language-panel {
+    width: min(100%, 29rem);
+    max-width: calc(100vw - (var(--container-inline) * 2));
+    text-align: center;
+  }
+
+  .links-profile {
+    position: relative;
+    width: min(100%, 29rem);
+    max-width: calc(100vw - (var(--container-inline) * 2));
+    margin-inline: auto;
+    padding-block: clamp(1rem, 2vw, 2rem);
+    min-width: 0;
+    text-align: left;
+  }
+
+  .language-panel[hidden],
+  .links-profile[hidden] {
+    display: none;
+  }
+
+  .links-group-title,
+  .profile-crm {
+    color: rgba(237, 237, 237, 0.8);
+    font-size: var(--font-body-sm);
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .language-panel h1 {
+    margin: 0 0 var(--space-8);
+    color: #FFFFFF;
+    font-size: var(--font-title-sm);
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .language-actions {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .language-button,
+  .link-card {
+    width: 100%;
+    min-height: 3.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(10, 10, 10, 0.16);
+    color: #FFFFFF;
+    font: inherit;
+    font-size: var(--font-body-lg);
+    font-weight: 400;
+    text-decoration: none;
+    backdrop-filter: blur(2px);
+    min-width: 0;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .language-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    padding-inline: var(--space-5);
+    cursor: pointer;
+  }
+
+  .language-button span:last-child,
+  .link-card span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .flag {
+    display: inline-flex;
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  .language-button:hover,
+  .link-card:hover {
+    transform: translateY(-1px);
+    border-color: rgba(255, 255, 255, 0.32);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .profile-language {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+  }
+
+  .profile-language-toggle {
+    min-width: 5.5rem;
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.07);
+    color: #FFFFFF;
+    cursor: pointer;
+    font: inherit;
+    font-size: var(--font-body);
+    font-weight: 400;
+    backdrop-filter: blur(3px);
+  }
+
+  .profile-language-toggle svg {
+    color: currentColor;
+  }
+
+  .profile-language-flag {
+    display: inline-flex;
+    font-size: var(--font-body);
+    line-height: 1;
+  }
+
+  .profile-language-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    width: 12rem;
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.4rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0.75rem;
+    background: rgba(18, 18, 18, 0.94);
+    box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.32);
+  }
+
+  .profile-language-menu[hidden] {
+    display: none;
+  }
+
+  .profile-language-menu button {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: transparent;
+    color: #FFFFFF;
+    cursor: pointer;
+    font: inherit;
+    padding: 0.65rem 0.75rem;
+    text-align: left;
+  }
+
+  .profile-language-menu button:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .profile-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: clamp(1.25rem, 2vw, 1.75rem);
+    margin-bottom: var(--space-12);
+    padding-right: 6rem;
+    min-width: 0;
+  }
+
+  .profile-header-copy {
+    min-width: 0;
+  }
+
+  .profile-photo {
+    width: clamp(4.75rem, 7vw, 5.75rem);
+    height: auto;
+    box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.3);
+  }
+
+  .profile-crm {
+    margin: 0 0 0.25rem;
+  }
+
+  .links-profile h2 {
+    margin: 0;
+    color: #FFFFFF;
+    font-size: var(--font-subsection-title);
+    font-weight: 500;
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+  }
+
+  .profile-specialty {
+    margin: var(--space-2) 0 0;
+    color: rgba(237, 237, 237, 0.74);
+    font-size: var(--font-body);
+    overflow-wrap: anywhere;
+  }
+
+  .links-profile h3 {
+    margin: 0 0 var(--space-4);
+    color: #FFFFFF;
+    font-size: var(--font-section-title);
+    font-weight: 400;
+    line-height: 1.17;
+    overflow-wrap: anywhere;
+  }
+
+  .profile-intro {
+    margin: 0 0 var(--space-12);
+    max-width: 31rem;
+    color: rgba(237, 237, 237, 0.72);
+    font-size: var(--font-body-lg);
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+  }
+
+  .profile-intro-list {
+    display: grid;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+    color: #FFFFFF;
+  }
+
+  .profile-intro-item {
+    display: grid;
+    grid-template-columns: 0.7rem minmax(0, 1fr);
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 400;
+  }
+
+  .profile-intro-item::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.78);
+    background:
+      radial-gradient(circle, #FFFFFF 0 32%, transparent 36%);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
+  }
+
+  .links-group {
+    display: grid;
+    gap: var(--space-5);
+    margin-bottom: var(--space-10);
+  }
+
+  .links-group-title {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-4);
+    margin: 0 0 var(--space-4);
+    color: #FFFFFF;
+    font-size: var(--font-body-lg);
+  }
+
+  .links-group-title::after {
+    content: '';
+    height: 1px;
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .link-card {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--cta-gap);
+    padding: var(--cta-block) var(--cta-inline);
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .address-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  .address-card {
+    aspect-ratio: 1;
+    min-height: 0;
+    border-radius: 1rem;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    font-size: var(--font-body);
+  }
+
+  .link-card svg,
+  .social-links svg {
+    color: currentColor;
+  }
+
+  .link-card .brand-icon path,
+  .social-links .brand-icon path {
+    fill: currentColor;
+  }
+
+  .link-card svg:not(.brand-icon) path {
+    fill: none;
+  }
+
+  .links-group + .links-group {
+    margin-top: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  .address-note {
+    margin: calc(-1 * var(--space-5)) 0 var(--space-10);
+    max-width: 250px;
+    margin-inline: auto;
+    color: rgba(237, 237, 237, 0.9);
+    font-size: var(--font-body-sm);
+    font-weight: 500;
+    line-height: 1.55;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  .social-block {
+    margin-top: clamp(1rem, 3vw, 2rem);
+    text-align: center;
+  }
+
+  .social-block p {
+    margin: 0 0 var(--space-4);
+    color: #FFFFFF;
+    font-size: var(--font-body-sm);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+
+  .social-links a {
+    width: 3rem;
+    height: 3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 50%;
+    color: #FFFFFF;
+    text-decoration: none;
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .social-links a:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  @media (max-width: 1024px) {
+    .links-shell {
+      align-items: flex-start;
+      width: min(100%, 44rem);
+      padding-top: var(--space-4);
+      padding-bottom: var(--space-12);
+    }
+
+    .links-profile {
+      padding-top: 0;
+    }
+
+    .profile-language {
+      top: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .links-page {
+      background-attachment: scroll;
+      background-position: center top;
+    }
+
+    .links-page::before {
+      background:
+        linear-gradient(180deg, rgba(12, 12, 12, 0.28), rgba(12, 12, 12, 0.44)),
+        rgba(0, 0, 0, 0.08);
+    }
+
+    .links-shell {
+      align-items: flex-start;
+      width: 100%;
+      padding-top: var(--space-4);
+      padding-bottom: var(--space-12);
+    }
+
+    .language-panel {
+      padding-top: 22vh;
+    }
+
+    .language-panel h1 {
+      font-size: var(--font-title-sm);
+    }
+
+    .language-button,
+    .link-card {
+      min-height: 3.5rem;
+      font-size: var(--font-body);
+    }
+
+    .profile-language {
+      top: 0;
+    }
+
+    .profile-language-toggle {
+      min-width: 4.875rem;
+      min-height: 2.5rem;
+      font-size: var(--font-body-sm);
+    }
+
+    .profile-header {
+      align-items: center;
+      margin-bottom: var(--space-10);
+    }
+
+    .profile-photo {
+      width: 4.75rem;
+    }
+
+    .links-profile h3 {
+      font-size: var(--font-title-md);
+    }
+
+    .profile-intro {
+      font-size: var(--font-body);
+      margin-bottom: var(--space-10);
+    }
+
+    .link-card {
+      padding-inline: var(--space-4);
+    }
+
+    .links-group {
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+
+    .address-note {
+      margin-bottom: var(--space-8);
+    }
+
+    .social-links {
+      justify-content: center;
+    }
+
+    .social-block {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .links-shell {
+      padding-inline: var(--space-4);
+    }
+
+    .language-panel,
+    .links-profile {
+      max-width: 100%;
+    }
+
+    .profile-header {
+      gap: var(--space-4);
+    }
+
+    .links-profile h2 {
+      font-size: var(--font-subsection-title);
+    }
+
+    .profile-crm,
+    .profile-specialty {
+      font-size: var(--font-body-sm);
+    }
+
+    .links-profile h3 {
+      font-size: var(--font-title-sm);
+    }
+  }
+
+  @media (max-width: 360px) {
+    .links-shell {
+      padding-top: var(--space-3);
+      padding-inline: var(--space-3);
+    }
+
+    .language-panel {
+      padding-top: 18vh;
+    }
+
+    .language-button,
+    .link-card {
+      min-height: 3.25rem;
+      font-size: var(--font-body-sm);
+    }
+
+    .profile-language {
+      top: 0;
+    }
+
+    .profile-language-toggle {
+      min-width: 4.5rem;
+    }
+
+    .profile-header {
+      gap: var(--space-3);
+      margin-bottom: var(--space-8);
+    }
+
+    .profile-photo {
+      width: 4rem;
+    }
+
+    .profile-crm,
+    .profile-specialty {
+      font-size: var(--font-body-xs);
+    }
+
+    .links-profile h2 {
+      font-size: 1.25rem;
+    }
+
+    .links-profile h3 {
+      font-size: 1.75rem;
+    }
+  }
+
+  @media (max-height: 640px) and (min-width: 768px) {
+    .links-shell {
+      align-items: flex-start;
+      padding-top: var(--space-12);
+      padding-bottom: var(--space-12);
+    }
+
+    .language-panel {
+      padding-top: var(--space-12);
+    }
+
+    .profile-header,
+    .profile-intro {
+      margin-bottom: var(--space-8);
+    }
+  }
+</style>

@@ -1,0 +1,134 @@
+---
+// AClinica: bg #131314, pt=70px, pb=120px
+// Layout: 2x2 grid (48.8% each) - img2 | text / img1 | img3
+---
+
+<section id="a-clinica" class="clinica-section" data-section="a-clinica">
+  <div class="site-container">
+    <div class="clinica-grid">
+
+      <!-- Linha 1, col 1: foto 2 -->
+      <div class="clinica-img-wrap clinica-img-1">
+        <img
+          src="/images/clinic-2.webp"
+          alt="Espaço de atendimento de Liege Mihioli"
+          loading="lazy"
+          class="clinica-img"
+          data-element="1"
+          data-element-name="image-1"
+        />
+      </div>
+
+      <!-- Linha 1, col 2: texto -->
+      <div class="clinica-texto">
+        <p class="clinica-label" data-element="2" data-element-name="label">ATENDIMENTO</p>
+        <h2 class="clinica-titulo" data-element="3" data-element-name="title">Consulta em Vila Velha para cuidar da voz profissional</h2>
+        <p class="clinica-desc" data-element="4" data-element-name="description">
+          O atendimento acontece em Vila Velha - ES, em um ambiente pensado para avaliação,
+          orientação e planejamento da voz. A consulta busca entender a rotina vocal, os desafios
+          de palco ou comunicação e os objetivos profissionais antes de definir qualquer conduta.
+        </p>
+      </div>
+
+      <!-- Linha 2, col 1: foto 1 -->
+      <div class="clinica-img-wrap clinica-img-2">
+        <img
+          src="/images/clinic-1.webp"
+          alt="Ambiente para avaliação de voz profissional"
+          loading="lazy"
+          class="clinica-img"
+          data-element="5"
+          data-element-name="image-2"
+        />
+      </div>
+
+      <!-- Linha 2, col 2: foto 3 -->
+      <div class="clinica-img-wrap clinica-img-3">
+        <img
+          src="/images/clinic-3.webp"
+          alt="Atendimento fonoaudiológico em Vila Velha"
+          loading="lazy"
+          class="clinica-img"
+          data-element="6"
+          data-element-name="image-3"
+        />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .clinica-section {
+    background-color: #131314;
+    padding-top: clamp(4rem, 6vw, 4.5rem);
+    padding-bottom: var(--section-space-lg);
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .clinica-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-5) 0;
+  }
+
+  .clinica-img-wrap {
+    width: 48.8%;
+    overflow: hidden;
+  }
+  .clinica-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s;
+  }
+  .clinica-img-wrap:hover .clinica-img {
+    transform: scale(1.03);
+  }
+
+  .clinica-texto {
+    width: 48.8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 0 var(--space-5);
+  }
+
+  .clinica-label {
+    color: #CFD2D8;
+    font-size: var(--font-label);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.64px;
+    line-height: 1.2em;
+    margin: 0 0 24px;
+  }
+
+  .clinica-titulo {
+    color: #FFFFFF;
+    font-size: var(--font-section-title);
+    font-weight: var(--font-section-title-weight);
+    line-height: var(--font-section-title-line-height);
+    letter-spacing: var(--font-section-title-letter-spacing);
+    margin: 0 0 20px;
+  }
+
+  .clinica-desc {
+    color: #CFD2D8;
+    font-size: var(--font-body-lg);
+    font-weight: 400;
+    line-height: 1.55em;
+    margin: 0;
+  }
+
+  @media (max-width: 767px) {
+    .clinica-grid { flex-direction: column; }
+    .clinica-img-wrap,
+    .clinica-texto { width: 100%; }
+    .clinica-texto { order: -1; }
+    .clinica-img-1 { order: 2; }
+    .clinica-img-2 { order: 3; }
+    .clinica-img-3 { order: 4; }
+  }
+</style>

@@ -1,0 +1,643 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  theme?: 'dark' | 'light' | 'pure-light';
+  canonical?: string;
+}
+
+const {
+  title = 'Liege Mihioli | Aprimoramento Vocal para Cantores em Vila Velha',
+  description = 'Aprimoramento vocal para cantores com Liege Mihioli, fonoaudióloga em Vila Velha - ES.',
+  theme = 'dark',
+  canonical,
+} = Astro.props;
+
+const SHOW_ELEMENT_BADGES = true;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class:list={[(theme === 'light' || theme === 'pure-light') && 'theme-light', theme === 'pure-light' && 'theme-pure-light']}
+    data-theme={theme}
+    data-show-element-badges={SHOW_ELEMENT_BADGES ? 'true' : 'false'}
+  >
+    <slot />
+    <div class="page-loading-overlay" aria-live="polite" aria-hidden="true">
+      <div class="page-loading-box">
+        <span class="page-loading-spinner" aria-hidden="true"></span>
+        <span>Carregando...</span>
+      </div>
+    </div>
+    <script>
+      type LanguageCode = 'pt' | 'en' | 'es';
+
+      const LANGUAGES: Record<LanguageCode, { htmlLang: string; locale: string; flag: string; code: string; label: string }> = {
+        pt: { htmlLang: 'pt-BR', locale: 'pt_BR', flag: '🇧🇷', code: 'PT', label: 'Português' },
+        en: { htmlLang: 'en', locale: 'en_US', flag: '🇺🇸', code: 'EN', label: 'English' },
+        es: { htmlLang: 'es', locale: 'es_ES', flag: '🇪🇸', code: 'ES', label: 'Español' },
+      };
+
+      const landingMeta: Record<LanguageCode, { title: string; description: string }> = {
+        pt: {
+          title: 'Liege Mihioli | Aprimoramento Vocal para Cantores em Vila Velha',
+          description: 'Aprimoramento vocal para cantores com Liege Mihioli, fonoaudióloga em Vila Velha - ES, com foco em resistência vocal, alcance, saúde da voz e performance para shows.',
+        },
+        en: {
+          title: 'Liege Mihioli | Vocal Improvement for Singers in Vila Velha',
+          description: 'Vocal improvement for singers with Liege Mihioli, speech therapist in Vila Velha, focused on vocal endurance, range, vocal health and performance.',
+        },
+        es: {
+          title: 'Liege Mihioli | Perfeccionamiento Vocal para Cantantes en Vila Velha',
+          description: 'Perfeccionamiento vocal para cantantes con Liege Mihioli, fonoaudióloga en Vila Velha, con foco en resistencia vocal, alcance, salud vocal y performance.',
+        },
+      };
+
+      const linksMeta: Record<LanguageCode, { title: string; description: string }> = {
+        pt: {
+          title: 'Links | Liege Mihioli',
+          description: 'Canais oficiais de contato, endereço e conteúdos de Liege Mihioli em português, inglês e espanhol.',
+        },
+        en: {
+          title: 'Links | Liege Mihioli',
+          description: 'Official contact channels, address and content from Liege Mihioli in Portuguese, English and Spanish.',
+        },
+        es: {
+          title: 'Links | Liege Mihioli',
+          description: 'Canales oficiales de contacto, dirección y contenidos de Liege Mihioli en portugués, inglés y español.',
+        },
+      };
+
+      const currentPageMeta = {
+        title: document.title,
+        description: document.querySelector('meta[name="description"]')?.getAttribute('content') || '',
+      };
+
+      const pageMetaTranslations: Record<string, Partial<Record<LanguageCode, { title: string; description: string }>>> = {
+        'Liege Mihioli | Aprimoramento Vocal para Cantores em Vila Velha': {
+          en: {
+            title: 'Liege Mihioli | Vocal Coaching for Singers in Vila Velha',
+            description: 'Vocal coaching for singers with Liege Mihioli, a speech therapist in Vila Velha - ES, focused on vocal endurance, range, vocal health and stage performance.',
+          },
+          es: {
+            title: 'Liege Mihioli | Perfeccionamiento Vocal para Cantantes en Vila Velha',
+            description: 'Perfeccionamiento vocal para cantantes con Liege Mihioli, fonoaudióloga en Vila Velha - ES, con foco en resistencia vocal, alcance, salud vocal y performance en shows.',
+          },
+        },
+        'Liege Mihioli | Reabilitação Vocal em Vila Velha': {
+          en: {
+            title: 'Liege Mihioli | Vocal Rehabilitation in Vila Velha',
+            description: 'Vocal rehabilitation with Liege Mihioli in Vila Velha - ES for lesions, fatigue, vocal changes and professionals who depend on their voice.',
+          },
+          es: {
+            title: 'Liege Mihioli | Rehabilitación Vocal en Vila Velha',
+            description: 'Rehabilitación vocal con Liege Mihioli en Vila Velha - ES para lesiones, fatiga, alteraciones vocales y profesionales que dependen de la voz.',
+          },
+        },
+        'Liege Mihioli | Aperfeiçoamento da Voz Falada em Vila Velha': {
+          en: {
+            title: 'Liege Mihioli | Spoken Voice Improvement in Vila Velha',
+            description: 'Spoken voice improvement with Liege Mihioli for communication, rhetoric, presence and performance for speakers, politicians and business leaders.',
+          },
+          es: {
+            title: 'Liege Mihioli | Perfeccionamiento de la Voz Hablada en Vila Velha',
+            description: 'Perfeccionamiento de la voz hablada con Liege Mihioli para comunicación, retórica, presencia y performance de conferencistas, políticos y empresarios.',
+          },
+        },
+      };
+
+      const textTranslations: Record<string, Partial<Record<LanguageCode, string>>> = {
+        'Carregando...': { en: 'Loading...', es: 'Cargando...' },
+        'Serviços': { en: 'Services', es: 'Servicios' },
+        'Aprimoramento Vocal para Cantores': { en: 'Vocal Coaching for Singers', es: 'Perfeccionamiento Vocal para Cantantes' },
+        'Reabilitação Vocal': { en: 'Vocal Rehabilitation', es: 'Rehabilitación Vocal' },
+        'Aperfeiçoamento da Voz Falada': { en: 'Spoken Voice Improvement', es: 'Perfeccionamiento de la Voz Hablada' },
+        'Depoimentos': { en: 'Testimonials', es: 'Testimonios' },
+        'Atendimento': { en: 'Care', es: 'Atención' },
+        'Contatos': { en: 'Contact', es: 'Contactos' },
+        'Agendar consulta': { en: 'Schedule appointment', es: 'Agendar consulta' },
+        'LIEGE MIHIOLI | FONOAUDIÓLOGA': { en: 'LIEGE MIHIOLI | SPEECH THERAPIST', es: 'LIEGE MIHIOLI | FONOAUDIÓLOGA' },
+        'Especialista em aprimoramento vocal para cantores profissionais': { en: 'Specialist in vocal coaching for professional singers', es: 'Especialista en perfeccionamiento vocal para cantantes profesionales' },
+        'Reabilitação vocal para recuperar segurança, conforto e resistência na voz': { en: 'Vocal rehabilitation to restore safety, comfort and endurance in the voice', es: 'Rehabilitación vocal para recuperar seguridad, comodidad y resistencia en la voz' },
+        'Aperfeiçoamento da voz falada para comunicar com presença, clareza e segurança': { en: 'Spoken voice improvement to communicate with presence, clarity and confidence', es: 'Perfeccionamiento de la voz hablada para comunicar con presencia, claridad y seguridad' },
+        'Fonoaudióloga': { en: 'Speech therapist', es: 'Fonoaudióloga' },
+        'Anos de experiência': { en: 'Years of experience', es: 'Años de experiencia' },
+        'Pacientes satisfeitos': { en: 'Satisfied patients', es: 'Pacientes satisfechos' },
+        'Horas dedicadas à performance vocal': { en: 'Hours dedicated to vocal performance', es: 'Horas dedicadas a la performance vocal' },
+        'Aprimoramento vocal': { en: 'Vocal coaching', es: 'Perfeccionamiento vocal' },
+        'para cantores': { en: 'for singers', es: 'para cantantes' },
+        'com plano individual': { en: 'with an individual plan', es: 'con plan individual' },
+        'Reabilitação vocal': { en: 'Vocal rehabilitation', es: 'Rehabilitación vocal' },
+        'para lesões e fadiga': { en: 'for lesions and fatigue', es: 'para lesiones y fatiga' },
+        'Aperfeiçoamento': { en: 'Improvement', es: 'Perfeccionamiento' },
+        'da voz falada': { en: 'of the spoken voice', es: 'de la voz hablada' },
+        'para comunicação': { en: 'for communication', es: 'para comunicación' },
+        '“A voz do cantor precisa responder à emoção, ao repertório e à agenda de shows sem perder cuidado técnico.”': { en: '“A singer’s voice needs to respond to emotion, repertoire and a show schedule without losing technical care.”', es: '“La voz del cantante necesita responder a la emoción, al repertorio y a la agenda de shows sin perder cuidado técnico.”' },
+        '“Reabilitar a voz exige escuta, precisão e um plano possível para a rotina de quem depende dela.”': { en: '“Rehabilitating the voice requires listening, precision and a plan that fits the routine of those who depend on it.”', es: '“Rehabilitar la voz exige escucha, precisión y un plan posible para la rutina de quien depende de ella.”' },
+        '“A voz falada comunica presença, intenção e segurança antes mesmo das palavras terminarem.”': { en: '“The spoken voice communicates presence, intention and confidence before the words are even finished.”', es: '“La voz hablada comunica presencia, intención y seguridad incluso antes de que terminen las palabras.”' },
+        'O que é aprimoramento vocal?': { en: 'What is vocal coaching?', es: '¿Qué es el perfeccionamiento vocal?' },
+        'É um acompanhamento fonoaudiológico voltado para melhorar eficiência, resistência e controle da voz cantada, respeitando a identidade vocal do artista.': { en: 'It is speech therapy support focused on improving efficiency, endurance and control of the singing voice while respecting the artist’s vocal identity.', es: 'Es un acompañamiento fonoaudiológico orientado a mejorar la eficiencia, la resistencia y el control de la voz cantada, respetando la identidad vocal del artista.' },
+        'Por que é necessário?': { en: 'Why is it necessary?', es: '¿Por qué es necesario?' },
+        'Porque a voz cantada exige resistência, controle e segurança para acompanhar ensaios, gravações e apresentações sem sobrecarga.': { en: 'Because the singing voice requires endurance, control and safety to handle rehearsals, recordings and performances without overload.', es: 'Porque la voz cantada exige resistencia, control y seguridad para acompañar ensayos, grabaciones y presentaciones sin sobrecarga.' },
+        'Quais ganhos terei?': { en: 'What gains can I expect?', es: '¿Qué beneficios tendré?' },
+        'Mais resistência, controle, alcance e confiança para cantar com menor esforço, preservando sua identidade vocal e sua performance.': { en: 'More endurance, control, range and confidence to sing with less effort while preserving your vocal identity and performance.', es: 'Más resistencia, control, alcance y confianza para cantar con menor esfuerzo, preservando tu identidad vocal y tu performance.' },
+        'O que é reabilitação vocal?': { en: 'What is vocal rehabilitation?', es: '¿Qué es la rehabilitación vocal?' },
+        'É o acompanhamento fonoaudiológico indicado quando há lesões, fadiga, rouquidão, desconforto ou perda de rendimento vocal.': { en: 'It is speech therapy support recommended when there are lesions, fatigue, hoarseness, discomfort or loss of vocal performance.', es: 'Es el acompañamiento fonoaudiológico indicado cuando hay lesiones, fatiga, ronquera, incomodidad o pérdida de rendimiento vocal.' },
+        'Para quem é indicada?': { en: 'Who is it for?', es: '¿Para quién está indicada?' },
+        'Pode ajudar cantores, professores, advogados, médicos, palestrantes e profissionais que usam a voz de forma intensa.': { en: 'It can help singers, teachers, lawyers, physicians, speakers and professionals who use their voice intensively.', es: 'Puede ayudar a cantantes, profesores, abogados, médicos, conferencistas y profesionales que usan la voz de forma intensa.' },
+        'Como o plano é conduzido?': { en: 'How is the plan conducted?', es: '¿Cómo se conduce el plan?' },
+        'A conduta considera avaliação vocal, rotina de uso da voz, sinais de sobrecarga e estratégias para recuperar função sem prometer resultado imediato.': { en: 'The approach considers vocal assessment, voice-use routine, signs of overload and strategies to recover function without promising immediate results.', es: 'La conducta considera evaluación vocal, rutina de uso de la voz, señales de sobrecarga y estrategias para recuperar función sin prometer resultados inmediatos.' },
+        'O que é aperfeiçoamento da voz falada?': { en: 'What is spoken voice improvement?', es: '¿Qué es el perfeccionamiento de la voz hablada?' },
+        'É um trabalho voltado ao uso estratégico da voz na comunicação profissional, apresentações, reuniões e fala pública.': { en: 'It is work focused on the strategic use of voice in professional communication, presentations, meetings and public speaking.', es: 'Es un trabajo orientado al uso estratégico de la voz en la comunicación profesional, presentaciones, reuniones y oratoria.' },
+        'Para quem é indicado?': { en: 'Who is it for?', es: '¿Para quién está indicado?' },
+        'É indicado para palestrantes, políticos, empresários, líderes, professores e profissionais que precisam comunicar com clareza.': { en: 'It is recommended for speakers, politicians, business leaders, executives, teachers and professionals who need to communicate clearly.', es: 'Está indicado para conferencistas, políticos, empresarios, líderes, profesores y profesionales que necesitan comunicar con claridad.' },
+        'O que pode ser trabalhado?': { en: 'What can be trained?', es: '¿Qué se puede trabajar?' },
+        'Projeção, ritmo, articulação, presença vocal, resistência, pausas e expressividade, sempre conforme avaliação individual.': { en: 'Projection, rhythm, articulation, vocal presence, endurance, pauses and expressiveness, always according to an individual assessment.', es: 'Proyección, ritmo, articulación, presencia vocal, resistencia, pausas y expresividad, siempre según una evaluación individual.' },
+        'Conhecimento musical': { en: 'Musical knowledge', es: 'Conocimiento musical' },
+        'A análise conecta técnica vocal, repertório e demanda artística para orientar escolhas aplicáveis ao palco.': { en: 'The analysis connects vocal technique, repertoire and artistic demands to guide choices that apply to the stage.', es: 'El análisis conecta técnica vocal, repertorio y demanda artística para orientar decisiones aplicables al escenario.' },
+        'Vivência artística': { en: 'Artistic experience', es: 'Vivencia artística' },
+        'O cuidado considera ensaios, gravações, shows e recuperação vocal entre apresentações.': { en: 'Care considers rehearsals, recordings, shows and vocal recovery between performances.', es: 'El cuidado considera ensayos, grabaciones, shows y recuperación vocal entre presentaciones.' },
+        'Altamente resolutiva': { en: 'Highly solution-oriented', es: 'Altamente resolutiva' },
+        'A condução busca clareza sobre o que ajustar, como praticar e como proteger a voz em momentos de maior demanda.': { en: 'The work seeks clarity on what to adjust, how to practice and how to protect the voice during periods of higher demand.', es: 'La conducción busca claridad sobre qué ajustar, cómo practicar y cómo proteger la voz en momentos de mayor demanda.' },
+        'Técnicas personalizadas': { en: 'Personalized techniques', es: 'Técnicas personalizadas' },
+        'Os exercícios são definidos conforme avaliação, objetivo vocal e resposta individual ao treino.': { en: 'Exercises are defined according to assessment, vocal goals and individual response to training.', es: 'Los ejercicios se definen según la evaluación, el objetivo vocal y la respuesta individual al entrenamiento.' },
+        'Caminhos de cuidado para voz profissional': { en: 'Care paths for professional voice', es: 'Caminos de cuidado para la voz profesional' },
+        'Plano para resistência, alcance e performance de cantores em rotina de shows, ensaios e gravações.': { en: 'A plan for endurance, range and performance for singers in a routine of shows, rehearsals and recordings.', es: 'Plan para resistencia, alcance y performance de cantantes en una rutina de shows, ensayos y grabaciones.' },
+        'Plano para resistência, alcance e performance de cantores em rotina...': { en: 'A plan for endurance, range and performance for singers in a routine...', es: 'Plan para resistencia, alcance y performance de cantantes en una rutina...' },
+        'Cuidado para lesões, fadiga e alterações vocais em cantores, professores, advogados, médicos e outros profissionais.': { en: 'Care for lesions, fatigue and vocal changes in singers, teachers, lawyers, physicians and other professionals.', es: 'Cuidado para lesiones, fatiga y alteraciones vocales en cantantes, profesores, abogados, médicos y otros profesionales.' },
+        'Cuidado para lesões, fadiga e alterações vocais em cantores,...': { en: 'Care for lesions, fatigue and vocal changes in singers,...', es: 'Cuidado para lesiones, fatiga y alteraciones vocales en cantantes,...' },
+        'Trabalho para comunicação, retórica, habilidades comunicativas e performance de palestrantes, políticos e empresários.': { en: 'Work for communication, rhetoric, communication skills and performance for speakers, politicians and business leaders.', es: 'Trabajo para comunicación, retórica, habilidades comunicativas y performance de conferencistas, políticos y empresarios.' },
+        'Trabalho para comunicação, retórica, habilidades comunicativas e...': { en: 'Work for communication, rhetoric, communication skills and...', es: 'Trabajo para comunicación, retórica, habilidades comunicativas y...' },
+        'Sobre a profissional': { en: 'About the professional', es: 'Sobre la profesional' },
+        'Liege Mihioli é fonoaudióloga em Vila Velha - ES, com atuação voltada à voz profissional, performance vocal e comunicação. Seu trabalho une conhecimento musical, vivência artística e técnica fonoaudiológica para orientar cantores que precisam sustentar uma rotina de ensaios, gravações e shows com mais segurança.': { en: 'Liege Mihioli is a speech therapist in Vila Velha - ES, focused on professional voice, vocal performance and communication. Her work combines musical knowledge, artistic experience and speech therapy technique to guide singers who need to sustain a routine of rehearsals, recordings and shows with greater safety.', es: 'Liege Mihioli es fonoaudióloga en Vila Velha - ES, con actuación enfocada en voz profesional, performance vocal y comunicación. Su trabajo une conocimiento musical, vivencia artística y técnica fonoaudiológica para orientar a cantantes que necesitan sostener una rutina de ensayos, grabaciones y shows con más seguridad.' },
+        'No aprimoramento vocal para cantores, a avaliação considera desconfortos, resistência, alcance, hábitos vocais, repertório e objetivos de palco. A proposta é construir um plano personalizado para melhorar eficiência vocal sem prometer resultados padronizados.': { en: 'In vocal coaching for singers, the assessment considers discomfort, endurance, range, vocal habits, repertoire and stage goals. The proposal is to build a personalized plan to improve vocal efficiency without promising standardized results.', es: 'En el perfeccionamiento vocal para cantantes, la evaluación considera molestias, resistencia, alcance, hábitos vocales, repertorio y objetivos de escenario. La propuesta es construir un plan personalizado para mejorar la eficiencia vocal sin prometer resultados estandarizados.' },
+        'Liege também atua com reabilitação vocal e aperfeiçoamento da voz falada para profissionais que dependem da comunicação, como professores, advogados, médicos, palestrantes, políticos e empresários.': { en: 'Liege also works with vocal rehabilitation and spoken voice improvement for professionals who depend on communication, such as teachers, lawyers, physicians, speakers, politicians and business leaders.', es: 'Liege también actúa con rehabilitación vocal y perfeccionamiento de la voz hablada para profesionales que dependen de la comunicación, como profesores, abogados, médicos, conferencistas, políticos y empresarios.' },
+        'Palestrante - Congresso Brasileiro de Fonodialogia': { en: 'Speaker - Brazilian Congress of Fonodialogia', es: 'Conferencista - Congreso Brasileño de Fonodialogia' },
+        'depoimentos': { en: 'testimonials', es: 'testimonios' },
+        'Trajetória construída com voz, técnica e performance': { en: 'A trajectory built with voice, technique and performance', es: 'Una trayectoria construida con voz, técnica y performance' },
+        'Avaliação 5.0 de 5': { en: '5.0 out of 5 rating', es: 'Evaluación 5.0 de 5' },
+        'Cheguei com medo de não aguentar a sequência de shows e consegui entender melhor meus limites, minha preparação e como cuidar da voz na rotina.': { en: 'I arrived afraid I would not handle a sequence of shows, and I was able to better understand my limits, preparation and how to care for my voice in my routine.', es: 'Llegué con miedo de no aguantar una secuencia de shows y pude entender mejor mis límites, mi preparación y cómo cuidar la voz en la rutina.' },
+        'O acompanhamento trouxe clareza para os aquecimentos, para a recuperação depois das apresentações e para cantar com menos esforço.': { en: 'The follow-up brought clarity for warm-ups, recovery after performances and singing with less effort.', es: 'El acompañamiento aportó claridad para los calentamientos, la recuperación después de las presentaciones y para cantar con menos esfuerzo.' },
+        'Gostei muito da forma individualizada como a minha voz foi avaliada. O plano fez sentido para o meu repertório e para minha demanda de palco.': { en: 'I really liked the individualized way my voice was assessed. The plan made sense for my repertoire and stage demands.', es: 'Me gustó mucho la forma individualizada en que evaluaron mi voz. El plan tuvo sentido para mi repertorio y mi demanda de escenario.' },
+        'Eu usava muito a voz no trabalho e em apresentações. As orientações ajudaram a organizar minha comunicação e reduzir a sensação de desgaste.': { en: 'I used my voice a lot at work and in presentations. The guidance helped organize my communication and reduce the feeling of strain.', es: 'Usaba mucho la voz en el trabajo y en presentaciones. Las orientaciones ayudaron a organizar mi comunicación y reducir la sensación de desgaste.' },
+        'O processo foi cuidadoso e prático. Entendi melhor como preparar a voz antes de cantar e como não exagerar durante ensaios longos.': { en: 'The process was careful and practical. I better understood how to prepare my voice before singing and how not to overdo it during long rehearsals.', es: 'El proceso fue cuidadoso y práctico. Entendí mejor cómo preparar la voz antes de cantar y cómo no exagerar durante ensayos largos.' },
+        'A consulta conectou técnica, saúde vocal e performance. Saí com orientações objetivas para aplicar nos shows e no estudo diário.': { en: 'The consultation connected technique, vocal health and performance. I left with objective guidance to apply in shows and daily practice.', es: 'La consulta conectó técnica, salud vocal y performance. Salí con orientaciones objetivas para aplicar en shows y en el estudio diario.' },
+        'Eu sentia insegurança em apresentações longas. O acompanhamento ajudou a perceber sinais de esforço e a organizar melhor minha preparação vocal.': { en: 'I felt insecure in long presentations. The follow-up helped me notice signs of effort and better organize my vocal preparation.', es: 'Sentía inseguridad en presentaciones largas. El acompañamiento ayudó a percibir señales de esfuerzo y organizar mejor mi preparación vocal.' },
+        'A abordagem foi muito prática. Consegui entender o que fazia minha voz cansar e como adaptar meus estudos antes dos compromissos musicais.': { en: 'The approach was very practical. I understood what made my voice tire and how to adapt my practice before musical commitments.', es: 'El abordaje fue muy práctico. Pude entender qué hacía que mi voz se cansara y cómo adaptar mis estudios antes de los compromisos musicales.' },
+        'O plano respeitou meu estilo musical e minha rotina. As orientações fizeram diferença na forma como preparo a voz antes de cantar.': { en: 'The plan respected my musical style and routine. The guidance made a difference in how I prepare my voice before singing.', es: 'El plan respetó mi estilo musical y mi rutina. Las orientaciones hicieron diferencia en la forma en que preparo la voz antes de cantar.' },
+        'Procurei atendimento por medo de perder a voz em semanas de muitos eventos. Recebi explicações claras e exercícios possíveis de manter.': { en: 'I sought care because I was afraid of losing my voice during weeks with many events. I received clear explanations and exercises I could maintain.', es: 'Busqué atención por miedo a perder la voz en semanas con muchos eventos. Recibí explicaciones claras y ejercicios posibles de mantener.' },
+        'Gostei da escuta cuidadosa e da conexão entre técnica e expressão artística. O atendimento trouxe mais consciência sobre minha voz.': { en: 'I liked the careful listening and the connection between technique and artistic expression. The care brought more awareness of my voice.', es: 'Me gustó la escucha cuidadosa y la conexión entre técnica y expresión artística. La atención trajo más conciencia sobre mi voz.' },
+        'Uso muito a voz para palestras e reuniões. O trabalho ajudou a melhorar projeção, ritmo e resistência sem forçar tanto.': { en: 'I use my voice a lot for lectures and meetings. The work helped improve projection, rhythm and endurance without forcing so much.', es: 'Uso mucho la voz para conferencias y reuniones. El trabajo ayudó a mejorar proyección, ritmo y resistencia sin forzar tanto.' },
+        'As orientações foram individualizadas e fizeram sentido para minha rotina de ensaio. Saí com mais clareza sobre aquecimento e recuperação.': { en: 'The guidance was individualized and made sense for my rehearsal routine. I left with more clarity about warm-up and recovery.', es: 'Las orientaciones fueron individualizadas y tuvieron sentido para mi rutina de ensayo. Salí con más claridad sobre calentamiento y recuperación.' },
+        'A avaliação foi detalhada e objetiva. Entendi pontos de ajuste para cantar com mais controle e menos tensão.': { en: 'The assessment was detailed and objective. I understood points to adjust so I could sing with more control and less tension.', es: 'La evaluación fue detallada y objetiva. Entendí puntos de ajuste para cantar con más control y menos tensión.' },
+        'Eu precisava melhorar minha comunicação profissional. O atendimento trouxe recursos para falar melhor em apresentações e reuniões.': { en: 'I needed to improve my professional communication. The care brought tools to speak better in presentations and meetings.', es: 'Necesitaba mejorar mi comunicación profesional. La atención trajo recursos para hablar mejor en presentaciones y reuniones.' },
+        'O processo ajudou a encaixar técnica vocal na vida real, com ensaios, gravações e shows. Foi um acompanhamento muito aplicável.': { en: 'The process helped fit vocal technique into real life, with rehearsals, recordings and shows. It was very applicable follow-up.', es: 'El proceso ayudó a encajar la técnica vocal en la vida real, con ensayos, grabaciones y shows. Fue un acompañamiento muy aplicable.' },
+        'Senti cuidado desde a primeira consulta. As recomendações foram claras e focadas no que eu precisava para cantar com mais segurança.': { en: 'I felt cared for from the first consultation. The recommendations were clear and focused on what I needed to sing with more confidence.', es: 'Sentí cuidado desde la primera consulta. Las recomendaciones fueron claras y enfocadas en lo que necesitaba para cantar con más seguridad.' },
+        'Como professor, minha voz chegava cansada ao fim do dia. O acompanhamento trouxe estratégias práticas para reduzir esforço e melhorar presença.': { en: 'As a teacher, my voice was tired by the end of the day. The follow-up brought practical strategies to reduce effort and improve presence.', es: 'Como profesor, mi voz llegaba cansada al final del día. El acompañamiento trajo estrategias prácticas para reducir esfuerzo y mejorar presencia.' },
+        'Depoimento mockado para substituir por avaliação real': { en: 'Mock testimonial to be replaced by a real review', es: 'Testimonio simulado para reemplazar por una evaluación real' },
+        'Avaliação pública extraída do Google': { en: 'Public review extracted from Google', es: 'Evaluación pública extraída de Google' },
+        'FAQ': { en: 'FAQ', es: 'FAQ' },
+        'Guia de perguntas frequentes': { en: 'Frequently asked questions guide', es: 'Guía de preguntas frecuentes' },
+        'Respostas objetivas sobre aprimoramento vocal, resistência e cuidado com a voz profissional.': { en: 'Clear answers about vocal improvement, endurance and care for the professional voice.', es: 'Respuestas objetivas sobre perfeccionamiento vocal, resistencia y cuidado de la voz profesional.' },
+        'Aprimoramento vocal é apenas para quem tem lesão?': { en: 'Is vocal coaching only for people with an injury?', es: '¿El perfeccionamiento vocal es solo para quien tiene una lesión?' },
+        'Não. Cantores podem procurar acompanhamento mesmo sem lesão, especialmente quando desejam cantar por mais tempo, ampliar recursos técnicos ou lidar melhor com uma rotina intensa de shows.': { en: 'No. Singers can seek support even without an injury, especially when they want to sing for longer, expand technical resources or better handle an intense show routine.', es: 'No. Los cantantes pueden buscar acompañamiento incluso sin lesión, especialmente cuando desean cantar por más tiempo, ampliar recursos técnicos o manejar mejor una rutina intensa de shows.' },
+        'Esse trabalho substitui aula de canto?': { en: 'Does this work replace singing lessons?', es: '¿Este trabajo reemplaza las clases de canto?' },
+        'Não. A fonoaudiologia vocal complementa a formação artística ao cuidar de eficiência, saúde, resistência e ajustes funcionais da voz.': { en: 'No. Vocal speech therapy complements artistic training by caring for efficiency, health, endurance and functional voice adjustments.', es: 'No. La fonoaudiología vocal complementa la formación artística al cuidar la eficiencia, la salud, la resistencia y los ajustes funcionales de la voz.' },
+        'É possível ampliar alcance vocal com segurança?': { en: 'Is it possible to expand vocal range safely?', es: '¿Es posible ampliar el alcance vocal con seguridad?' },
+        'A evolução depende da avaliação individual, da prática orientada e dos hábitos vocais. O foco é buscar ganho técnico sem sobrecarga e sem promessa de resultado padronizado.': { en: 'Progress depends on individual assessment, guided practice and vocal habits. The focus is to seek technical gain without overload and without promising a standardized result.', es: 'La evolución depende de la evaluación individual, la práctica orientada y los hábitos vocales. El foco es buscar ganancia técnica sin sobrecarga y sin prometer un resultado estandarizado.' },
+        'O acompanhamento ajuda em períodos de shows?': { en: 'Does follow-up help during show periods?', es: '¿El acompañamiento ayuda durante períodos de shows?' },
+        'Sim. O plano pode organizar aquecimento, desaquecimento, recuperação vocal, manejo de esforço e estratégias para sustentar a demanda de apresentações.': { en: 'Yes. The plan can organize warm-up, cool-down, vocal recovery, effort management and strategies to sustain performance demands.', es: 'Sí. El plan puede organizar calentamiento, enfriamiento, recuperación vocal, manejo del esfuerzo y estrategias para sostener la demanda de presentaciones.' },
+        'Quem trabalha com voz falada também pode ser atendido?': { en: 'Can people who work with spoken voice also be seen?', es: '¿Quién trabaja con voz hablada también puede ser atendido?' },
+        'Sim. Além de cantores, o atendimento contempla professores, advogados, médicos, palestrantes, políticos, empresários e outros profissionais que dependem da comunicação.': { en: 'Yes. In addition to singers, care includes teachers, lawyers, physicians, speakers, politicians, business leaders and other professionals who depend on communication.', es: 'Sí. Además de cantantes, la atención contempla profesores, abogados, médicos, conferencistas, políticos, empresarios y otros profesionales que dependen de la comunicación.' },
+        'Quando procurar reabilitação vocal?': { en: 'When should I seek vocal rehabilitation?', es: '¿Cuándo buscar rehabilitación vocal?' },
+        'Quando há rouquidão recorrente, fadiga, dor, desconforto, perda de potência, falhas ou diagnóstico de alteração vocal.': { en: 'When there is recurring hoarseness, fatigue, pain, discomfort, loss of power, voice breaks or a diagnosis of vocal change.', es: 'Cuando hay ronquera recurrente, fatiga, dolor, incomodidad, pérdida de potencia, fallas o diagnóstico de alteración vocal.' },
+        'Reabilitação vocal serve para cantores?': { en: 'Is vocal rehabilitation for singers?', es: '¿La rehabilitación vocal sirve para cantantes?' },
+        'Sim. Cantores podem precisar de reabilitação para recuperar conforto, resistência e segurança após sinais de sobrecarga ou lesão.': { en: 'Yes. Singers may need rehabilitation to recover comfort, endurance and safety after signs of overload or injury.', es: 'Sí. Los cantantes pueden necesitar rehabilitación para recuperar comodidad, resistencia y seguridad después de señales de sobrecarga o lesión.' },
+        'Preciso parar de usar a voz?': { en: 'Do I need to stop using my voice?', es: '¿Necesito dejar de usar la voz?' },
+        'A orientação depende da avaliação. Em muitos casos, o foco é organizar uso, repouso relativo e exercícios adequados à rotina.': { en: 'Guidance depends on the assessment. In many cases, the focus is to organize use, relative rest and exercises suited to the routine.', es: 'La orientación depende de la evaluación. En muchos casos, el foco es organizar el uso, el reposo relativo y ejercicios adecuados a la rutina.' },
+        'Quanto tempo leva a reabilitação?': { en: 'How long does rehabilitation take?', es: '¿Cuánto tiempo dura la rehabilitación?' },
+        'O tempo varia conforme quadro, hábitos, demanda vocal e adesão ao plano. A evolução é acompanhada caso a caso.': { en: 'The time varies according to the condition, habits, vocal demand and adherence to the plan. Progress is monitored case by case.', es: 'El tiempo varía según el cuadro, los hábitos, la demanda vocal y la adhesión al plan. La evolución se acompaña caso por caso.' },
+        'Profissionais da voz falada também podem fazer?': { en: 'Can spoken voice professionals also do it?', es: '¿Los profesionales de la voz hablada también pueden hacerlo?' },
+        'Sim. Professores, advogados, médicos, palestrantes e executivos podem se beneficiar quando a voz está sobrecarregada.': { en: 'Yes. Teachers, lawyers, physicians, speakers and executives can benefit when the voice is overloaded.', es: 'Sí. Profesores, abogados, médicos, conferencistas y ejecutivos pueden beneficiarse cuando la voz está sobrecargada.' },
+        'Aperfeiçoamento da voz falada é terapia?': { en: 'Is spoken voice improvement therapy?', es: '¿El perfeccionamiento de la voz hablada es terapia?' },
+        'É um acompanhamento fonoaudiológico voltado à comunicação e performance vocal, com objetivos definidos conforme a necessidade profissional.': { en: 'It is speech therapy support focused on communication and vocal performance, with goals defined according to professional needs.', es: 'Es un acompañamiento fonoaudiológico orientado a la comunicación y la performance vocal, con objetivos definidos según la necesidad profesional.' },
+        'Serve para palestrantes e empresários?': { en: 'Is it for speakers and business leaders?', es: '¿Sirve para conferencistas y empresarios?' },
+        'Sim. O trabalho pode apoiar apresentações, reuniões, discursos, negociações e situações de alta exposição.': { en: 'Yes. The work can support presentations, meetings, speeches, negotiations and high-exposure situations.', es: 'Sí. El trabajo puede apoyar presentaciones, reuniones, discursos, negociaciones y situaciones de alta exposición.' },
+        'A voz pode transmitir mais segurança?': { en: 'Can the voice convey more confidence?', es: '¿La voz puede transmitir más seguridad?' },
+        'A percepção vocal envolve ritmo, intensidade, articulação, pausas e presença. Esses recursos podem ser treinados de forma orientada.': { en: 'Vocal perception involves rhythm, intensity, articulation, pauses and presence. These resources can be trained with guidance.', es: 'La percepción vocal involucra ritmo, intensidad, articulación, pausas y presencia. Estos recursos pueden entrenarse de forma orientada.' },
+        'Preciso ter problema de voz para fazer?': { en: 'Do I need to have a voice problem to do it?', es: '¿Necesito tener un problema de voz para hacerlo?' },
+        'Não. Muitos profissionais procuram o aperfeiçoamento para evoluir comunicação, retórica e performance sem ter lesão vocal.': { en: 'No. Many professionals seek improvement to evolve communication, rhetoric and performance without having a vocal injury.', es: 'No. Muchos profesionales buscan el perfeccionamiento para evolucionar comunicación, retórica y performance sin tener lesión vocal.' },
+        'O plano é igual para todos?': { en: 'Is the plan the same for everyone?', es: '¿El plan es igual para todos?' },
+        'Não. A avaliação considera objetivo, contexto profissional, rotina, estilo de fala e pontos de ajuste individuais.': { en: 'No. The assessment considers goals, professional context, routine, speaking style and individual adjustment points.', es: 'No. La evaluación considera objetivo, contexto profesional, rutina, estilo de habla y puntos de ajuste individuales.' },
+        'ATENDIMENTO': { en: 'CARE', es: 'ATENCIÓN' },
+        'Consulta em Vila Velha para cuidar da voz profissional': { en: 'Consultation in Vila Velha to care for the professional voice', es: 'Consulta en Vila Velha para cuidar la voz profesional' },
+        'O atendimento acontece em Vila Velha - ES, em um ambiente pensado para avaliação, orientação e planejamento da voz. A consulta busca entender a rotina vocal, os desafios de palco ou comunicação e os objetivos profissionais antes de definir qualquer conduta.': { en: 'Care takes place in Vila Velha - ES, in an environment designed for voice assessment, guidance and planning. The consultation seeks to understand the vocal routine, stage or communication challenges and professional goals before defining any approach.', es: 'La atención se realiza en Vila Velha - ES, en un ambiente pensado para evaluación, orientación y planificación de la voz. La consulta busca entender la rutina vocal, los desafíos de escenario o comunicación y los objetivos profesionales antes de definir cualquier conducta.' },
+        'Informações de contato': { en: 'Contact information', es: 'Información de contacto' },
+        'Localização': { en: 'Location', es: 'Ubicación' },
+        'Telefone': { en: 'Phone', es: 'Teléfono' },
+        'Acompanhe as redes sociais': { en: 'Follow on social media', es: 'Siga las redes sociales' },
+        'Todos os direitos reservados © 2026 | Liege Mihioli': { en: 'All rights reserved © 2026 | Liege Mihioli', es: 'Todos los derechos reservados © 2026 | Liege Mihioli' },
+        'Desenvolvido por:': { en: 'Developed by:', es: 'Desarrollado por:' },
+      };
+
+      const validLanguages = Object.keys(LANGUAGES) as LanguageCode[];
+      const isValidLanguage = (language: string | null): language is LanguageCode =>
+        !!language && validLanguages.includes(language as LanguageCode);
+      const normalizeText = (text: string) => text.replace(/\s+/g, ' ').trim();
+      const originalTextByNode = new WeakMap<Text, string>();
+
+      const applyMetadata = (language: LanguageCode) => {
+        const translatedPageMeta = language === 'pt'
+          ? currentPageMeta
+          : pageMetaTranslations[currentPageMeta.title]?.[language] || currentPageMeta;
+        const meta = document.querySelector('.links-page')
+          ? linksMeta[language]
+          : translatedPageMeta;
+        const languageInfo = LANGUAGES[language];
+        document.documentElement.lang = languageInfo.htmlLang;
+        document.title = meta.title;
+        document.querySelector('meta[name="description"]')?.setAttribute('content', meta.description);
+        document.querySelector('meta[property="og:title"]')?.setAttribute('content', meta.title);
+        document.querySelector('meta[property="og:description"]')?.setAttribute('content', meta.description);
+        document.querySelector('meta[property="og:locale"]')?.setAttribute('content', languageInfo.locale);
+      };
+
+      const applyLanguageControls = (language: LanguageCode) => {
+        const languageInfo = LANGUAGES[language];
+        document.querySelectorAll<HTMLElement>('.lang-trigger').forEach((trigger) => {
+          trigger.querySelector<HTMLElement>('.lang-flag')!.textContent = languageInfo.flag;
+          trigger.querySelector<HTMLElement>('.lang-code')!.textContent = languageInfo.code;
+        });
+        document.querySelectorAll<HTMLElement>('.mobile-current-lang').forEach((trigger) => {
+          trigger.textContent = languageInfo.flag;
+          trigger.setAttribute('aria-label', `Idioma atual: ${languageInfo.label}`);
+        });
+        document.querySelectorAll<HTMLElement>('[data-language-switch]').forEach((item) => {
+          item.setAttribute('aria-current', String(item.dataset.languageSwitch === language));
+        });
+      };
+
+      const applyTextNodes = (language: LanguageCode) => {
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+          acceptNode(node) {
+            const parent = node.parentElement;
+            if (!parent || ['SCRIPT', 'STYLE', 'TEXTAREA'].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
+            return normalizeText(node.textContent || '') ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+          },
+        });
+        const nodes: Text[] = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode as Text);
+        nodes.forEach((node) => {
+          if (!originalTextByNode.has(node)) originalTextByNode.set(node, normalizeText(node.textContent || ''));
+          const source = originalTextByNode.get(node)!;
+          const translated = language === 'pt' ? source : textTranslations[source]?.[language] || source;
+          node.textContent = node.textContent?.match(/^\s/) ? ` ${translated}` : translated;
+        });
+      };
+
+      const updateLanguageLinks = (language: LanguageCode) => {
+        document.querySelectorAll<HTMLAnchorElement>('[href="/"], [href^="/?"]').forEach((link) => {
+          const target = new URL(link.getAttribute('href') || '/', window.location.origin);
+          target.searchParams.set('lang', language);
+          link.href = `${target.pathname}${target.search}${target.hash}`;
+        });
+      };
+
+      const updateWhatsappLinks = (language: LanguageCode) => {
+        const websiteRoutes: Record<LanguageCode, string> = {
+          pt: '/whatsapp-website',
+          en: '/whatsapp-website-en',
+          es: '/whatsapp-website-es',
+        };
+        const instagramRoutes: Record<LanguageCode, string> = {
+          pt: '/whatsapp-instagram',
+          en: '/whatsapp-instagram-en',
+          es: '/whatsapp-instagram-es',
+        };
+        document.querySelectorAll<HTMLAnchorElement>('a[href^="/whatsapp-website"]').forEach((link) => {
+          link.href = websiteRoutes[language];
+        });
+        document.querySelectorAll<HTMLAnchorElement>('a[href^="/whatsapp-instagram"]').forEach((link) => {
+          link.href = instagramRoutes[language];
+        });
+      };
+
+      const setLandingLanguage = (language: LanguageCode, persist = true) => {
+        applyTextNodes(language);
+        applyMetadata(language);
+        applyLanguageControls(language);
+        updateLanguageLinks(language);
+        updateWhatsappLinks(language);
+        document.body.dataset.language = language;
+        if (persist) {
+          window.localStorage.setItem('landingLanguage', language);
+          const url = new URL(window.location.href);
+          url.searchParams.set('lang', language);
+          window.history.replaceState({}, '', url);
+        }
+        window.dispatchEvent(new Event('resize'));
+      };
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const urlLanguage = params.get('lang');
+        const savedLanguage = window.localStorage.getItem('landingLanguage');
+        const initialLanguage = isValidLanguage(urlLanguage)
+          ? urlLanguage
+          : isValidLanguage(savedLanguage)
+            ? savedLanguage
+            : 'pt';
+
+        document.querySelectorAll<HTMLAnchorElement>('[data-language-switch]').forEach((option) => {
+          option.addEventListener('click', (event) => {
+            event.preventDefault();
+            const language = option.dataset.languageSwitch;
+            if (isValidLanguage(language)) setLandingLanguage(language);
+            option.closest('.lang-dropdown, .mobile-lang-dropdown')?.classList.remove('is-open');
+          });
+        });
+
+        setLandingLanguage(initialLanguage, isValidLanguage(urlLanguage));
+      });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const dropdowns = document.querySelectorAll<HTMLElement>('[data-lang-dropdown], [data-mobile-lang-dropdown]');
+        dropdowns.forEach((dropdown) => {
+          const trigger = dropdown.querySelector<HTMLButtonElement>('button');
+          trigger?.addEventListener('click', () => {
+            const isOpen = dropdown.classList.toggle('is-open');
+            trigger.setAttribute('aria-expanded', String(isOpen));
+          });
+        });
+        document.addEventListener('click', (event) => {
+          dropdowns.forEach((dropdown) => {
+            if (!dropdown.contains(event.target as Node)) {
+              dropdown.classList.remove('is-open');
+              dropdown.querySelector('button')?.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      });
+    </script>
+    <script>
+      (() => {
+        const MIN_LOADING_MS = 500;
+
+        const shouldIgnoreLink = (link: HTMLAnchorElement, event: MouseEvent) => {
+          if (event.defaultPrevented || event.button !== 0) return true;
+          if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return true;
+          if (link.target && link.target !== '_self') return true;
+          if (link.hasAttribute('download')) return true;
+
+          const rawHref = link.getAttribute('href');
+          if (!rawHref || rawHref.startsWith('#')) return true;
+
+          const targetUrl = new URL(rawHref, window.location.href);
+          if (targetUrl.origin !== window.location.origin) return true;
+          if (['tel:', 'mailto:'].includes(targetUrl.protocol)) return true;
+          if (targetUrl.pathname.startsWith('/whatsapp-')) return true;
+
+          const currentUrl = new URL(window.location.href);
+          const samePath = targetUrl.pathname === currentUrl.pathname;
+          const sameSearch = targetUrl.search === currentUrl.search;
+          if (samePath && (targetUrl.hash || sameSearch)) return true;
+
+          return false;
+        };
+
+        const setLoading = (isLoading: boolean) => {
+          const overlay = document.querySelector<HTMLElement>('.page-loading-overlay');
+          if (!overlay) return;
+          overlay.classList.toggle('is-active', isLoading);
+          overlay.setAttribute('aria-hidden', String(!isLoading));
+        };
+
+        window.addEventListener('pageshow', () => setLoading(false));
+
+        document.addEventListener('click', (event) => {
+          const link = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[href]');
+          if (!link || shouldIgnoreLink(link, event)) return;
+
+          event.preventDefault();
+          setLoading(true);
+
+          const href = link.href;
+          window.setTimeout(() => {
+            window.location.href = href;
+          }, MIN_LOADING_MS);
+        });
+      })();
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        if (document.body.dataset.showElementBadges !== 'true') return;
+
+        const getElementLabel = (target: HTMLElement) =>
+          `${target.dataset.element}${target.dataset.elementName ? `: ${target.dataset.elementName}` : ''}`;
+
+        const getCopyText = (target: HTMLElement, type: 'section' | 'element') => {
+          if (type === 'section') return `section: ${target.dataset.section || ''}`;
+
+          const section = target.closest<HTMLElement>('[data-section]');
+          const sectionLabel = section ? `section: ${section.dataset.section || ''}` : '';
+          const elementLabel = getElementLabel(target);
+
+          return sectionLabel ? `${sectionLabel} - ${elementLabel}` : elementLabel;
+        };
+
+        const copyText = async (text: string) => {
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(text);
+            return;
+          }
+
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          textarea.setAttribute('readonly', '');
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          textarea.remove();
+        };
+
+        const badgeItems = [
+          ...Array.from(document.querySelectorAll<HTMLElement>('[data-section]')).map((target) => ({
+            target,
+            className: 'component-ref-badge',
+            label: `section: ${target.dataset.section || ''}`,
+            copyText: getCopyText(target, 'section'),
+          })),
+          ...Array.from(document.querySelectorAll<HTMLElement>('[data-element]')).map((target) => ({
+            target,
+            className: 'element-ref-badge',
+            label: getElementLabel(target),
+            copyText: getCopyText(target, 'element'),
+          })),
+        ].map((item) => {
+          const badge = document.createElement('span');
+          badge.className = item.className;
+
+          const label = document.createElement('span');
+          label.className = 'ref-badge-label';
+          label.textContent = item.label;
+
+          const copyButton = document.createElement('button');
+          copyButton.type = 'button';
+          copyButton.className = 'ref-badge-copy';
+          copyButton.setAttribute('aria-label', `Copiar ${item.copyText}`);
+          copyButton.title = `Copiar ${item.copyText}`;
+          copyButton.innerHTML = `
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <rect x="9" y="9" width="10" height="10" rx="2"></rect>
+              <path d="M5 15V7a2 2 0 0 1 2-2h8"></path>
+            </svg>
+          `;
+          copyButton.addEventListener('click', async (event) => {
+            event.stopPropagation();
+            event.preventDefault();
+
+            try {
+              await copyText(item.copyText);
+              copyButton.classList.add('is-copied');
+              window.setTimeout(() => copyButton.classList.remove('is-copied'), 800);
+            } catch (error) {
+              console.error('Failed to copy badge label', error);
+            }
+          });
+
+          badge.append(label, copyButton);
+          document.body.appendChild(badge);
+          return { ...item, badge };
+        });
+
+        const isVisible = (element: HTMLElement) =>
+          !element.closest('[hidden]') && element.getClientRects().length > 0;
+
+        const badgesOverlap = (
+          a: { x: number; y: number; width: number; height: number },
+          b: { x: number; y: number; width: number; height: number }
+        ) =>
+          a.x < b.x + b.width &&
+          a.x + a.width > b.x &&
+          a.y < b.y + b.height &&
+          a.y + a.height > b.y;
+
+        const updateBadges = () => {
+          const viewportWidth = window.innerWidth;
+          const viewportHeight = window.innerHeight;
+          const placedBadges: { x: number; y: number; width: number; height: number }[] = [];
+
+          badgeItems.forEach(({ target, badge }) => {
+            const rect = target.getBoundingClientRect();
+            const isInViewport = rect.bottom >= 0 && rect.right >= 0 && rect.top <= viewportHeight && rect.left <= viewportWidth;
+
+            if (!isVisible(target) || !isInViewport) {
+              badge.style.display = 'none';
+              return;
+            }
+
+            badge.style.display = 'inline-flex';
+            const badgeWidth = badge.offsetWidth;
+            const badgeHeight = badge.offsetHeight;
+            const minX = 4;
+            const minY = 4;
+            const maxX = Math.max(minX, viewportWidth - badgeWidth - minX);
+            const maxY = Math.max(minY, viewportHeight - badgeHeight - minY);
+            const baseX = Math.max(minX, Math.min(rect.left, maxX));
+            const baseY = Math.max(minY, Math.min(rect.top, maxY));
+            const candidates: { x: number; y: number }[] = [];
+            const seenCandidates = new Set<string>();
+            const addCandidate = (x: number, y: number) => {
+              const candidate = {
+                x: Math.max(minX, Math.min(x, maxX)),
+                y: Math.max(minY, Math.min(y, maxY)),
+              };
+              const key = `${Math.round(candidate.x)}:${Math.round(candidate.y)}`;
+              if (!seenCandidates.has(key)) {
+                seenCandidates.add(key);
+                candidates.push(candidate);
+              }
+            };
+
+            for (let row = 0; row <= 16; row += 1) {
+              const yOffsets = row === 0 ? [0] : [row * (badgeHeight + 6), -row * (badgeHeight + 6)];
+              yOffsets.forEach((yOffset) => {
+                for (let col = 0; col <= 10; col += 1) {
+                  const xOffsets = col === 0 ? [0] : [col * (badgeWidth + 6), -col * (badgeWidth + 6)];
+                  xOffsets.forEach((xOffset) => addCandidate(baseX + xOffset, baseY + yOffset));
+                }
+              });
+            }
+
+            let position = candidates.find((candidate) => {
+              const candidateRect = { ...candidate, width: badgeWidth, height: badgeHeight };
+              return !placedBadges.some((placedBadge) => badgesOverlap(candidateRect, placedBadge));
+            });
+
+            if (!position) {
+              for (let y = minY; y <= maxY; y += badgeHeight + 6) {
+                for (let x = minX; x <= maxX; x += 10) {
+                  const candidate = { x, y };
+                  const candidateRect = { ...candidate, width: badgeWidth, height: badgeHeight };
+                  if (!placedBadges.some((placedBadge) => badgesOverlap(candidateRect, placedBadge))) {
+                    position = candidate;
+                    break;
+                  }
+                }
+                if (position) break;
+              }
+            }
+
+            position = position || { x: baseX, y: baseY };
+
+            const x = position.x;
+            const y = position.y;
+            placedBadges.push({ x, y, width: badgeWidth, height: badgeHeight });
+            badge.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+          });
+        };
+
+        let ticking = false;
+        const requestUpdate = () => {
+          if (ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(() => {
+            ticking = false;
+            updateBadges();
+          });
+        };
+
+        updateBadges();
+        window.addEventListener('scroll', requestUpdate, { passive: true });
+        window.addEventListener('resize', requestUpdate);
+        window.addEventListener('load', requestUpdate);
+      });
+    </script>
+  </body>
+</html>

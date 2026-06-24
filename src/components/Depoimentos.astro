@@ -1,0 +1,364 @@
+---
+const depoimentos = [
+  {
+    nome: 'Mariana',
+    texto: 'Cheguei com medo de não aguentar a sequência de shows e consegui entender melhor meus limites, minha preparação e como cuidar da voz na rotina.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'Rafael',
+    texto: 'O acompanhamento trouxe clareza para os aquecimentos, para a recuperação depois das apresentações e para cantar com menos esforço.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'Camila',
+    texto: 'Gostei muito da forma individualizada como a minha voz foi avaliada. O plano fez sentido para o meu repertório e para minha demanda de palco.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'Bruno',
+    texto: 'Eu usava muito a voz no trabalho e em apresentações. As orientações ajudaram a organizar minha comunicação e reduzir a sensação de desgaste.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'Letícia',
+    texto: 'O processo foi cuidadoso e prático. Entendi melhor como preparar a voz antes de cantar e como não exagerar durante ensaios longos.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'André',
+    texto: 'A consulta conectou técnica, saúde vocal e performance. Saí com orientações objetivas para aplicar nos shows e no estudo diário.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'Fernanda',
+    texto: 'Eu sentia insegurança em apresentações longas. O acompanhamento ajudou a perceber sinais de esforço e a organizar melhor minha preparação vocal.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'Lucas',
+    texto: 'A abordagem foi muito prática. Consegui entender o que fazia minha voz cansar e como adaptar meus estudos antes dos compromissos musicais.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'Paula',
+    texto: 'O plano respeitou meu estilo musical e minha rotina. As orientações fizeram diferença na forma como preparo a voz antes de cantar.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'Thiago',
+    texto: 'Procurei atendimento por medo de perder a voz em semanas de muitos eventos. Recebi explicações claras e exercícios possíveis de manter.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'Isabela',
+    texto: 'Gostei da escuta cuidadosa e da conexão entre técnica e expressão artística. O atendimento trouxe mais consciência sobre minha voz.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'Eduardo',
+    texto: 'Uso muito a voz para palestras e reuniões. O trabalho ajudou a melhorar projeção, ritmo e resistência sem forçar tanto.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'Natália',
+    texto: 'As orientações foram individualizadas e fizeram sentido para minha rotina de ensaio. Saí com mais clareza sobre aquecimento e recuperação.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'Gustavo',
+    texto: 'A avaliação foi detalhada e objetiva. Entendi pontos de ajuste para cantar com mais controle e menos tensão.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'Priscila',
+    texto: 'Eu precisava melhorar minha comunicação profissional. O atendimento trouxe recursos para falar melhor em apresentações e reuniões.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'Henrique',
+    texto: 'O processo ajudou a encaixar técnica vocal na vida real, com ensaios, gravações e shows. Foi um acompanhamento muito aplicável.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'Renata',
+    texto: 'Senti cuidado desde a primeira consulta. As recomendações foram claras e focadas no que eu precisava para cantar com mais segurança.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+  {
+    nome: 'Marcelo',
+    texto: 'Como professor, minha voz chegava cansada ao fim do dia. O acompanhamento trouxe estratégias práticas para reduzir esforço e melhorar presença.',
+    fonte: 'Depoimento mockado para substituir por avaliação real',
+  },
+];
+
+const chunks = Array.from({ length: Math.ceil(depoimentos.length / 6) }, (_, index) =>
+  depoimentos.slice(index * 6, index * 6 + 6),
+);
+---
+
+<section id="depoimentos" class="dep-section" data-section="depoimentos">
+  <div class="site-container">
+    <div class="dep-header">
+      <p class="dep-label" data-element="1" data-element-name="label">depoimentos</p>
+      <h2 class="dep-title" data-element="2" data-element-name="title">Trajetória construída com voz, técnica e performance</h2>
+    </div>
+
+    <div class="swiper depoimentos-swiper">
+      <div class="swiper-wrapper">
+        {chunks.map((group, groupIndex) => (
+          <div class="swiper-slide">
+            <div class="dep-slide-grid">
+              {group.map((dep, depIndex) => (
+                <article
+                  class="dep-card"
+                  data-element={String(groupIndex * 6 + depIndex + 3)}
+                  data-element-name={`review-card-${groupIndex * 6 + depIndex + 1}`}
+                >
+                  <div class="dep-stars" aria-label="Avaliação 5.0 de 5">
+                    <span class="dep-score">5.0</span>
+                    <span class="dep-stars-text">★★★★★</span>
+                  </div>
+                  <div class="dep-card-body">
+                    <p class="dep-texto">{dep.texto}</p>
+                  </div>
+                  <div class="dep-card-footer">
+                    <p class="dep-nome">{dep.nome}</p>
+                    <p class="dep-google">{dep.fonte ?? 'Avaliação pública extraída do Google'}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="dep-controls">
+        <div class="swiper-pagination dep-pagination" data-element="21" data-element-name="pagination"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import 'swiper/css';
+  import 'swiper/css/pagination';
+</script>
+
+<script>
+  import Swiper from 'swiper';
+  import { Pagination, Autoplay } from 'swiper/modules';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const swiper = new Swiper('.depoimentos-swiper', {
+      modules: [Pagination, Autoplay],
+      slidesPerView: 1,
+      spaceBetween: 32,
+      loop: false,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+        waitForTransition: true,
+      },
+      pagination: { el: '.dep-pagination', clickable: true },
+    });
+
+    const cards = document.querySelectorAll('#depoimentos .dep-card');
+    const pause = () => swiper.autoplay?.pause();
+    const resume = () => swiper.autoplay?.resume();
+
+    cards.forEach((card) => {
+      card.addEventListener('mouseenter', pause);
+      card.addEventListener('mouseleave', resume);
+      card.addEventListener('click', pause);
+      card.addEventListener('focusin', pause);
+      card.addEventListener('touchstart', pause, { passive: true });
+    });
+  });
+</script>
+
+<style>
+  .dep-section {
+    background-color: #191919;
+    padding-top: var(--section-space-lg);
+    padding-bottom: var(--section-space-xl);
+    font-family: 'Manrope', sans-serif;
+    overflow: hidden;
+  }
+
+  .dep-header {
+    text-align: center;
+    margin-bottom: clamp(3rem, 6vw, 4.375rem);
+    padding: 0 var(--space-5);
+  }
+
+  .dep-label {
+    color: #CFD2D8;
+    font-size: var(--font-label);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2.56px;
+    line-height: 1.5em;
+    margin: 0 0 20px;
+  }
+
+  .dep-title {
+    color: #FFFFFF;
+    font-size: var(--font-section-title);
+    font-weight: var(--font-section-title-weight);
+    line-height: var(--font-section-title-line-height);
+    letter-spacing: var(--font-section-title-letter-spacing);
+    margin: 0;
+  }
+
+  .depoimentos-swiper {
+    position: relative;
+    padding: 0 0 clamp(3.5rem, 6vw, 4.375rem);
+    --swiper-theme-color: #b8bcc2;
+    --swiper-pagination-color: #b8bcc2;
+  }
+
+  .swiper-slide {
+    height: auto;
+  }
+
+  .dep-slide-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--grid-gap) var(--grid-gap-lg);
+    --dep-card-height: 265px;
+    --dep-row-gap: 32px;
+  }
+
+  .dep-card {
+    height: var(--dep-card-height);
+    background-color: #242426;
+    border-radius: 2px;
+    padding: clamp(1rem, 2vw, 1.125rem) clamp(1.25rem, 3vw, 1.5rem) var(--space-5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .dep-card-body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: #4B4B4D transparent;
+  }
+
+  .dep-card-body::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  .dep-card-body::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .dep-card-body::-webkit-scrollbar-thumb {
+    background: #4B4B4D;
+    border-radius: 999px;
+  }
+
+  .dep-stars {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    flex-shrink: 0;
+  }
+
+  .dep-score {
+    color: #CFD2D8;
+    font-size: var(--font-body-sm);
+    line-height: 1;
+  }
+
+  .dep-stars-text {
+    color: #F9CE7A;
+    font-size: var(--font-body);
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .dep-texto {
+    color: #FFFFFF;
+    font-size: var(--font-body);
+    font-weight: 400;
+    line-height: 1.55em;
+    margin: 0;
+  }
+
+  .dep-nome {
+    color: #CFD2D8;
+    font-size: var(--font-body);
+    font-weight: 500;
+    line-height: 1.4em;
+    margin: 0 0 8px;
+  }
+
+  .dep-google {
+    color: #8E9198;
+    font-size: var(--font-caption);
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .dep-card-footer {
+    margin-top: var(--space-3);
+    flex-shrink: 0;
+    padding-top: var(--space-3);
+    background: #242426;
+  }
+
+  .dep-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--space-9);
+  }
+
+  .dep-pagination {
+    position: static !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .dep-pagination :global(.swiper-pagination-bullet) {
+    background-color: #6f757d !important;
+    opacity: 1 !important;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    transition: background 0.3s ease;
+  }
+
+  .dep-pagination :global(.swiper-pagination-bullet-active) {
+    background-color: #c8ccd2 !important;
+  }
+
+  @media (max-width: 1024px) {
+    .depoimentos-swiper { padding: 0 0 64px; }
+    .dep-slide-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+      --dep-row-gap: 28px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .dep-header { padding: 0; }
+    .depoimentos-swiper { padding: 0 0 56px; }
+    .dep-slide-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .dep-controls { margin-top: 32px; }
+  }
+</style>

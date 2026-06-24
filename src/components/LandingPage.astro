@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import BigNumbers from './BigNumbers.astro';
+import Funcional from './Funcional.astro';
+import CirurgiaTratamento2 from './CirurgiaTratamento2.astro';
+import Sobre from './Sobre.astro';
+import Depoimentos from './Depoimentos.astro';
+import FAQ from './FAQ.astro';
+import AClinica from './AClinica.astro';
+import Footer from './Footer.astro';
+import type { Service } from '../content/services';
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'MedicalBusiness',
+      '@id': '#professional',
+      name: 'Liege Mihioli',
+      alternateName: 'Liege Mihioli Fonoaudióloga',
+      medicalSpecialty: 'SpeechPathology',
+      identifier: [{ '@type': 'PropertyValue', name: 'CRFa', value: 'CRFa 6-9005' }],
+      telephone: '+55 27 98118-7879',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'R. Prof. Telmo de Souza Torres, 255 - Praia da Costa',
+        addressLocality: 'Vila Velha',
+        addressRegion: 'ES',
+        postalCode: '29100-260',
+        addressCountry: 'BR',
+      },
+      knowsAbout: ['Aprimoramento vocal para cantores', 'Reabilitação vocal', 'Voz falada', 'Performance vocal'],
+    },
+    {
+      '@type': 'Service',
+      '@id': '#service',
+      name: service.title,
+      serviceType: 'Fonoaudiologia vocal',
+      provider: { '@id': '#professional' },
+      areaServed: 'Vila Velha - ES',
+      description: service.metaDescription,
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': '#faq',
+      mainEntity: service.faqs.slice(0, 3).map(([pergunta, resposta]) => ({
+        '@type': 'Question',
+        name: pergunta,
+        acceptedAnswer: { '@type': 'Answer', text: resposta },
+      })),
+    },
+  ],
+};
+---
+
+<Layout title={service.pageTitle} description={service.metaDescription} theme="dark">
+  <Header />
+  <main>
+    <Hero title={service.heroTitle} heroImage={service.heroImage} />
+    <BigNumbers />
+    <Funcional
+      titleLines={service.introTitle}
+      quote={service.quote}
+      imagePrimary={service.imagePrimary}
+      imageSecondary={service.imageSecondary}
+      cards={service.cards}
+    />
+    <CirurgiaTratamento2 currentSlug={service.slug} />
+    <Sobre photoSrc={service.aboutPhoto} />
+    <Depoimentos />
+    <FAQ faqs={service.faqs.map(([pergunta, resposta]) => ({ pergunta, resposta }))} />
+    <AClinica />
+  </main>
+  <Footer />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</Layout>

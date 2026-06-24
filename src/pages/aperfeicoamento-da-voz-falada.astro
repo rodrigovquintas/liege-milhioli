@@ -1,0 +1,8 @@
+---
+import LandingPage from '../components/LandingPage.astro';
+import { getService } from '../content/services';
+
+const service = getService('voz-falada');
+---
+
+<LandingPage service={service} />

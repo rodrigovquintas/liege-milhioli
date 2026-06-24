@@ -1,0 +1,283 @@
+@import "tailwindcss";
+
+@theme {
+  --font-manrope: "Manrope", sans-serif;
+
+  --color-bg-main: #181818;
+  --color-bg-section: #191919;
+  --color-bg-header: #151417;
+  --color-bg-footer: #131314;
+  --color-bg-card: #212122;
+  --color-bg-card-alt: #2D2D2E;
+  --color-bg-light: #E9E9E9;
+  --color-accent: #9DA1A7;
+  --color-text-white: #FFFFFF;
+  --color-text-light: #EDEDED;
+  --color-text-muted: #CFD2D8;
+  --color-text-dim: #8E9198;
+  --color-text-dark: #1B1B1D;
+  --color-divider: #414142;
+
+  --space-0: 0;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 1.75rem;
+  --space-8: 2rem;
+  --space-9: 2.25rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-14: 3.5rem;
+  --space-16: 4rem;
+  --space-18: 4.5rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-28: 7rem;
+  --space-30: 7.5rem;
+
+  --container-inline: clamp(1rem, 2.2vw, 1.5rem);
+  --section-space-sm: clamp(3.75rem, 6vw, 5rem);
+  --section-space-md: clamp(4.5rem, 7vw, 6.25rem);
+  --section-space-lg: clamp(5rem, 8vw, 7.5rem);
+  --section-space-xl: clamp(5.5rem, 9vw, 9.375rem);
+  --section-gap-md: clamp(1.5rem, 3vw, 2.5rem);
+  --section-gap-lg: clamp(2rem, 4vw, 3.75rem);
+  --grid-gap: clamp(1.25rem, 2.5vw, 1.875rem);
+  --grid-gap-lg: clamp(1.5rem, 3vw, 2.125rem);
+  --cta-inline: clamp(1.75rem, 3vw, 2.5rem);
+  --cta-block: clamp(0.9375rem, 1.8vw, 1.125rem);
+  --cta-gap: var(--space-3);
+
+  --font-caption: 0.75rem;
+  --font-body-xs: 0.8125rem;
+  --font-body-sm: 0.875rem;
+  --font-nav: 0.9375rem;
+  --font-label: 1rem;
+  --font-body: 1rem;
+  --font-body-lg: 1.125rem;
+  --font-cta: 1.125rem;
+  --font-icon-cta: 1.4375rem;
+  --font-card-title: 1.875rem;
+  --font-title-sm: 2rem;
+  --font-footer-title: 2.5rem;
+  --font-section-title: 3.125rem;
+  --font-section-title-line-height: 1.16;
+  --font-section-title-letter-spacing: 0;
+  --font-section-title-weight: 400;
+  --font-subsection-title: 1.5rem;
+  --font-title-md: 3.5rem;
+  --font-title-md-compact: 3.375rem;
+  --font-title-md-loose: 3.5rem;
+  --font-display: 4rem;
+  --font-display-hero: 4rem;
+  --font-stat: 4rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+  background-color: #181818;
+  color: #EDEDED;
+  -webkit-font-smoothing: antialiased;
+  --image-placeholder-bg-start: #2A2A2B;
+  --image-placeholder-bg-end: #1F1F20;
+  --image-placeholder-border: rgba(255, 255, 255, 0.14);
+  --image-placeholder-mark: rgba(255, 255, 255, 0.28);
+}
+
+.page-loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  display: grid;
+  place-items: center;
+  background: rgba(12, 12, 13, 0.74);
+  color: #FFFFFF;
+  font-family: "Manrope", sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+  transition: opacity 180ms ease;
+}
+
+.page-loading-overlay.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.page-loading-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(24, 24, 26, 0.86);
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.28);
+  font-size: var(--font-body-sm);
+  font-weight: 600;
+}
+
+.page-loading-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  border-top-color: #FFFFFF;
+  border-radius: 50%;
+  animation: page-loading-spin 750ms linear infinite;
+}
+
+@keyframes page-loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.site-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-inline: var(--container-inline);
+}
+
+.component-ref-badge,
+.element-ref-badge {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2147483647;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-height: 1.25rem;
+  padding: 0.1875rem 0.25rem 0.1875rem 0.4375rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: #D6A84F;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
+  color: #181818;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+  pointer-events: auto;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.ref-badge-label {
+  pointer-events: none;
+}
+
+.ref-badge-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.34);
+  color: currentColor;
+  cursor: pointer;
+}
+
+.ref-badge-copy:hover,
+.ref-badge-copy:focus-visible {
+  background: rgba(255, 255, 255, 0.52);
+}
+
+.ref-badge-copy.is-copied {
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.ref-badge-copy svg {
+  width: 0.6875rem;
+  height: 0.6875rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.component-ref-badge {
+  background: #4FC3D6;
+  color: #101416;
+}
+
+.element-ref-badge {
+  background: #D6A84F;
+  color: #181818;
+}
+
+body[data-show-element-badges="false"] .component-ref-badge,
+body[data-show-element-badges="false"] .element-ref-badge {
+  display: none;
+}
+
+.image-placeholder {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--image-placeholder-border);
+  background:
+    linear-gradient(135deg, var(--image-placeholder-bg-start) 0%, var(--image-placeholder-bg-end) 100%);
+  color: var(--image-placeholder-mark);
+}
+
+.image-placeholder::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.image-placeholder::before {
+  inset: clamp(1rem, 3vw, 1.75rem);
+  border: 1px dashed currentColor;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --font-nav: 0.875rem;
+    --font-cta: 1.125rem;
+    --font-card-title: 1.875rem;
+    --font-section-title: 2.5rem;
+    --font-subsection-title: 1.5rem;
+    --font-title-md: 2.625rem;
+    --font-title-md-compact: 2.625rem;
+    --font-title-md-loose: 2.75rem;
+    --font-display: 3rem;
+    --font-display-hero: 3.25rem;
+    --font-stat: 3.25rem;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --font-body-xs: 0.8125rem;
+    --font-body-sm: 0.875rem;
+    --font-cta: 1rem;
+    --font-card-title: 1.5rem;
+    --font-title-sm: 1.5rem;
+    --font-footer-title: 2rem;
+    --font-section-title: 2rem;
+    --font-subsection-title: 1.375rem;
+    --font-title-md: 2rem;
+    --font-title-md-compact: 2rem;
+    --font-title-md-loose: 2.25rem;
+    --font-display: 2.25rem;
+    --font-display-hero: 2.5rem;
+    --font-stat: 2.625rem;
+  }
+}

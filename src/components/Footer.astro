@@ -1,0 +1,309 @@
+---
+import Icon from './Icon.astro';
+
+const WA_LINK = "/whatsapp-website";
+const MAP_LINK = "https://www.google.com/maps?cid=12925205516975630672";
+const PHONE_LINK = "tel:+5527981187879";
+const INSTAGRAM_LINK = "https://www.instagram.com/liegemilhioli/reels/";
+const YOUTUBE_LINK = "https://www.youtube.com/@liegemilhioli1869";
+---
+
+<footer id="contatos" class="footer-section" data-section="footer">
+  <div class="site-container">
+    <div class="footer-main">
+      <div class="footer-contact">
+        <h2 class="footer-title" data-element="1" data-element-name="title">Informações de contato</h2>
+
+        <p class="footer-subtitle" data-element="2" data-element-name="location-label">Localização</p>
+        <ul class="footer-list">
+          <li>
+            <a href={MAP_LINK} target="_blank" rel="noopener noreferrer" class="footer-link" data-element="3" data-element-name="location-link">
+              <span class="footer-icon" aria-hidden="true">
+                <Icon name="map" size={24} strokeWidth={1.8} />
+              </span>
+              <span>R. Prof. Telmo de Souza Torres, 255 - Praia da Costa, Vila Velha - ES, 29100-260</span>
+            </a>
+          </li>
+        </ul>
+
+        <p class="footer-subtitle" data-element="4" data-element-name="phone-label">Telefone</p>
+        <ul class="footer-list">
+          <li>
+            <a href={PHONE_LINK} class="footer-link" data-element="5" data-element-name="phone-link">
+              <span class="footer-icon" aria-hidden="true">
+                <Icon name="phone" size={24} strokeWidth={1.8} />
+              </span>
+              <span>(27) 98118-7879</span>
+            </a>
+          </li>
+          <li>
+            <a href={WA_LINK} class="footer-link" data-element="6" data-element-name="whatsapp-link">
+              <span class="footer-icon" aria-hidden="true">
+                <Icon name="whatsapp" size={24} />
+              </span>
+              <span>(27) 98118-7879</span>
+            </a>
+          </li>
+        </ul>
+
+        <p class="footer-subtitle" data-element="7" data-element-name="social-label">Acompanhe as redes sociais</p>
+        <ul class="footer-social">
+          <li>
+            <a href={INSTAGRAM_LINK} target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-element="8" data-element-name="instagram">
+              <Icon name="instagram" size={26} />
+            </a>
+          </li>
+          <li>
+            <a href={YOUTUBE_LINK} target="_blank" rel="noopener noreferrer" aria-label="YouTube" data-element="10" data-element-name="youtube">
+              <Icon name="youtube" size={28} />
+            </a>
+          </li>
+        </ul>
+
+        <a href={WA_LINK} class="footer-btn-cta" data-element="11" data-element-name="cta">
+          <span class="footer-btn-icon">
+            <Icon name="whatsapp" size={21} />
+          </span>
+          Agendar consulta
+        </a>
+      </div>
+
+      <div class="footer-map-wrap">
+        <iframe
+          class="footer-map"
+          title="Mapa do atendimento de Liege Mihioli"
+          src="https://www.google.com/maps?cid=12925205516975630672&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          data-element="12"
+          data-element-name="map"
+        ></iframe>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy" data-element="13" data-element-name="copyright">Todos os direitos reservados © 2026 | Liege Mihioli</p>
+      <div class="footer-dev">
+        <span data-element="14" data-element-name="developed-by">Desenvolvido por:</span>
+        <a href="http://medvoxagency.com/" target="_blank" rel="noopener noreferrer" class="footer-dev-brand" data-element="15" data-element-name="developer-brand">MedVox Agency</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-section {
+    background-color: #131314;
+    padding-top: var(--section-space-md);
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: minmax(0, 0.93fr) minmax(0, 1.07fr);
+    gap: var(--section-gap-lg);
+    align-items: start;
+    width: 100%;
+  }
+
+  .footer-map-wrap {
+    width: 100%;
+    min-height: 513px;
+    background: #1b1b1d;
+  }
+
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-title {
+    color: #FFFFFF;
+    font-size: var(--font-section-title);
+    font-weight: var(--font-section-title-weight);
+    line-height: var(--font-section-title-line-height);
+    letter-spacing: var(--font-section-title-letter-spacing);
+    margin: 0 0 var(--space-10);
+  }
+
+  .footer-subtitle {
+    color: #8E9198;
+    font-size: var(--font-caption);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0 0 var(--space-5);
+  }
+
+  .footer-list,
+  .footer-social {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-8);
+  }
+
+  .footer-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .footer-link {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    color: #CFD2D8;
+    font-size: var(--font-body-sm);
+    font-weight: 400;
+    line-height: 2;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-link:hover,
+  .footer-dev a:hover {
+    color: #ffffff;
+  }
+
+  .footer-link:hover .footer-icon {
+    color: #CFD2D8;
+  }
+
+  .footer-social a:hover {
+    color: #ffffff;
+  }
+
+  .footer-icon {
+    display: inline-flex;
+    color: #CFD2D8;
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: var(--space-3);
+    margin-bottom: 30px;
+  }
+
+  .footer-social a {
+    display: inline-flex;
+    color: #CFD2D8;
+    transition: color 0.2s ease;
+  }
+
+  .footer-social a svg,
+  .footer-social a path {
+    color: currentColor;
+    fill: currentColor;
+  }
+
+  .footer-social a:hover svg,
+  .footer-social a:hover path {
+    color: currentColor;
+    fill: currentColor;
+  }
+
+  .footer-btn-cta {
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: var(--cta-gap);
+    align-self: flex-start;
+    background-color: #FFFFFF;
+    color: #1B1B1D;
+    border-radius: 32px;
+    padding: var(--cta-block) var(--cta-inline);
+    font-size: var(--font-cta);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.5s;
+  }
+
+  .footer-btn-cta:hover {
+    background-color: #E9E9E9;
+  }
+
+  .footer-btn-icon {
+    display: flex;
+    align-items: center;
+  }
+
+  .footer-map {
+    display: block;
+    width: 100%;
+    height: 513px;
+    border: 0;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid #414142;
+    margin-top: clamp(4rem, 7vw, 5.3125rem);
+    padding: var(--space-10) 0 clamp(1.75rem, 4vw, 2.1875rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(2rem, 8vw, 6.875rem);
+  }
+
+  .footer-copy {
+    color: #8E9198;
+    font-size: var(--font-body-sm);
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .footer-dev {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .footer-dev span,
+  .footer-dev a {
+    color: #8E9198;
+    font-size: var(--font-body-sm);
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  .footer-dev a {
+    transition: color 0.2s ease;
+  }
+
+  .footer-dev-brand {
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 1024px) {
+    .footer-main {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .footer-map-wrap {
+      min-height: 420px;
+    }
+
+    .footer-map {
+      height: 420px;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .footer-title { margin-bottom: 28px; }
+
+    .footer-copy,
+    .footer-dev span,
+    .footer-dev a {
+      font-size: var(--font-body-xs);
+    }
+  }
+</style>

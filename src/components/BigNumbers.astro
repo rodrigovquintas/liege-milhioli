@@ -1,0 +1,163 @@
+---
+// Big Numbers: bg #131314, border top/bottom #3B3C3D, pt/pb 75px
+// Layout: renatobignumbers badge (40%) + stats 3 colunas (60%)
+---
+
+<section class="cred-section" data-section="credenciais">
+  <div class="site-container">
+    <div class="cred-inner">
+
+      <!-- Badge: imagem do template + CRM -->
+      <div class="cred-badge">
+        <img
+          src="/images/liege-credentials.webp"
+          alt="Liege Mihioli CRFa 6-9005"
+          class="cred-badge-img"
+          data-element="1"
+          data-element-name="foto"
+        />
+        <div class="cred-badge-text">
+          <p class="cred-badge-title">
+            <span class="t1" data-element="2" data-element-name="crm-cro">CRFa 6-9005</span><br />
+            <span data-element="3" data-element-name="nome">Liege Mihioli</span>
+          </p>
+          <p class="cred-badge-desc" data-element="4" data-element-name="especialidade">Fonoaudióloga</p>
+        </div>
+      </div>
+
+      <!-- Stats: +16, +5 mil, +22 mil -->
+      <div class="cred-stats">
+        <div class="stat-item">
+          <span class="stat-number" data-element="5" data-element-name="big-number-1">+14</span>
+          <span class="stat-label" data-element="6" data-element-name="big-number-description-1">Anos de experiência</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-element="7" data-element-name="big-number-2">+2.800</span>
+          <span class="stat-label" data-element="8" data-element-name="big-number-description-2">Pacientes satisfeitos</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-element="9" data-element-name="big-number-3">+8.400</span>
+          <span class="stat-label" data-element="10" data-element-name="big-number-description-3">Horas dedicadas à performance vocal</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .cred-section {
+    background-color: #131314;
+    border-top: 1px solid #3B3C3D;
+    border-bottom: 1px solid #3B3C3D;
+    padding-block: clamp(3.75rem, 6vw, 4.6875rem);
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .cred-inner {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: var(--section-gap-md);
+  }
+
+  /* Badge: image + text side by side */
+  .cred-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    width: clamp(260px, 34%, 380px);
+    flex-shrink: 0;
+  }
+  .cred-badge-img {
+    width: clamp(74px, 17%, 86px);
+    min-width: 74px;
+    height: auto;
+    flex-shrink: 0;
+  }
+  .cred-badge-text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .cred-badge-title {
+    color: #FFFFFF;
+    font-size: var(--font-title-sm);
+    font-weight: 600;
+    line-height: 1.2em;
+    margin: 0;
+  }
+  .t1 {
+    color: #CFD2D8;
+    font-size: var(--font-body-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .cred-badge-desc {
+    color: #CFD2D8;
+    font-size: var(--font-body-lg);
+    font-weight: 400;
+    letter-spacing: 0.72px;
+    margin: 0;
+  }
+
+  /* Stats */
+  .cred-stats {
+    flex: 1;
+    display: flex;
+    gap: var(--space-7);
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+  .stat-number {
+    color: #FFFFFF;
+    font-size: clamp(3rem, 4.6vw, 3.5rem);
+    font-weight: 500;
+    line-height: 1.2em;
+    white-space: nowrap;
+  }
+  .stat-label {
+    display: block;
+    color: #CFD2D8;
+    font-size: var(--font-body);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: 0.64px;
+    min-height: 2.5em;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 1024px) {
+    .cred-badge {
+      width: clamp(240px, 32%, 320px);
+    }
+
+    .cred-stats {
+      gap: var(--space-5);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .cred-inner {
+      flex-direction: column;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+    .cred-badge { width: 100%; }
+    .cred-stats {
+      width: 100%;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .stat-label { white-space: normal; }
+  }
+</style>

@@ -1,0 +1,249 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  faqs?: { pergunta: string; resposta: string }[];
+}
+
+const WA_LINK = "/whatsapp-website";
+
+const defaultFaqs = [
+  {
+    pergunta: 'Aprimoramento vocal é apenas para quem tem lesão?',
+    resposta: 'Não. Cantores podem procurar acompanhamento mesmo sem lesão, especialmente quando desejam cantar por mais tempo, ampliar recursos técnicos ou lidar melhor com uma rotina intensa de shows.',
+  },
+  {
+    pergunta: 'Esse trabalho substitui aula de canto?',
+    resposta: 'Não. A fonoaudiologia vocal complementa a formação artística ao cuidar de eficiência, saúde, resistência e ajustes funcionais da voz.',
+  },
+  {
+    pergunta: 'É possível ampliar alcance vocal com segurança?',
+    resposta: 'A evolução depende da avaliação individual, da prática orientada e dos hábitos vocais. O foco é buscar ganho técnico sem sobrecarga e sem promessa de resultado padronizado.',
+  },
+  {
+    pergunta: 'O acompanhamento ajuda em períodos de shows?',
+    resposta: 'Sim. O plano pode organizar aquecimento, desaquecimento, recuperação vocal, manejo de esforço e estratégias para sustentar a demanda de apresentações.',
+  },
+  {
+    pergunta: 'Quem trabalha com voz falada também pode ser atendido?',
+    resposta: 'Sim. Além de cantores, o atendimento contempla professores, advogados, médicos, palestrantes, políticos, empresários e outros profissionais que dependem da comunicação.',
+  },
+];
+
+const { faqs = defaultFaqs } = Astro.props;
+---
+
+<section id="faq" class="faq-section" data-section="faq">
+  <div class="site-container">
+    <div class="faq-layout">
+
+      <!-- Coluna esquerda: label + título grande + texto + CTA -->
+      <div class="faq-esquerda">
+        <p class="faq-label" data-element="1" data-element-name="label">FAQ</p>
+        <h2 class="faq-titulo" data-element="2" data-element-name="title">Guia de perguntas frequentes</h2>
+        <p class="faq-desc" data-element="3" data-element-name="description">Respostas objetivas sobre aprimoramento vocal, resistência e cuidado com a voz profissional.</p>
+        <a href={WA_LINK} class="btn-cta" data-element="4" data-element-name="cta">
+          <span class="btn-icon-wrap">
+            <Icon name="whatsapp" size={21} />
+          </span>
+          Agendar consulta
+        </a>
+      </div>
+
+      <!-- Coluna direita: accordion -->
+      <div class="faq-accordion">
+        {faqs.map((faq, i) => (
+          <div class="faq-item" data-faq={i}>
+            <button class="faq-btn" aria-expanded="false">
+              <span class="faq-pergunta" data-element={String(i * 2 + 5)} data-element-name={`question-${i + 1}`}>{faq.pergunta}</span>
+              <Icon name="chevron-down" class="faq-icon" size={20} strokeWidth={2} />
+            </button>
+            <div class="faq-body">
+              <p class="faq-resposta" data-element={String(i * 2 + 6)} data-element-name={`answer-${i + 1}`}>{faq.resposta}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    background-color: #131314;
+    padding-block: var(--section-space-md);
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .faq-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: var(--section-gap-lg);
+    align-items: start;
+  }
+
+  /* Left column */
+  .faq-esquerda {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .faq-label {
+    color: #CFD2D8;
+    font-size: var(--font-label);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2.56px;
+    line-height: 1.5em;
+    margin: 0 0 8px;
+  }
+
+  .faq-titulo {
+    color: #FFFFFF;
+    font-size: var(--font-section-title);
+    font-weight: var(--font-section-title-weight);
+    line-height: var(--font-section-title-line-height);
+    letter-spacing: var(--font-section-title-letter-spacing);
+    margin: 0 0 24px;
+  }
+
+  .faq-desc {
+    color: #CFD2D8;
+    font-size: var(--font-body-lg);
+    font-weight: 400;
+    line-height: 1.55em;
+    letter-spacing: 0.72px;
+    margin: 0 0 var(--space-8);
+    padding-bottom: var(--space-2);
+  }
+
+  /* CTA Button */
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: var(--cta-gap);
+    background-color: #FFFFFF;
+    color: #1B1B1D;
+    border-radius: 32px;
+    padding: var(--cta-block) var(--cta-inline);
+    font-size: var(--font-cta);
+    font-weight: 600;
+    font-family: 'Manrope', sans-serif;
+    text-decoration: none;
+    transition: background-color 0.5s;
+    align-self: flex-start;
+  }
+  .btn-cta:hover { background-color: #E9E9E9; }
+  .btn-icon-wrap { display: flex; align-items: center; }
+
+  /* Accordion */
+  .faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: var(--space-5);
+  }
+
+  .faq-item {
+    border-radius: 2px;
+    border: 1px solid #3B3C3D;
+    margin-bottom: var(--space-8);
+    overflow: hidden;
+  }
+
+  .faq-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-3) var(--space-12) var(--space-3) var(--space-4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    text-align: left;
+    position: relative;
+    transition: background-color 0.2s ease;
+  }
+
+  .faq-pergunta {
+    color: #FFFFFF;
+    font-size: var(--font-body);
+    font-weight: 600;
+    font-family: 'Manrope', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.64px;
+    line-height: 1.55em;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    transition: transform 0.3s, opacity 0.2s ease;
+    position: absolute;
+    right: 16px;
+  }
+  .faq-icon.open { transform: rotate(180deg); }
+  .faq-btn:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .faq-btn:hover .faq-pergunta {
+    color: #E8E8EA;
+  }
+  .faq-btn:hover .faq-icon path {
+    stroke: #CFD2D8;
+  }
+
+  .faq-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .faq-resposta {
+    color: #CFD2D8;
+    font-size: var(--font-body);
+    font-weight: 600;
+    font-family: 'Manrope', sans-serif;
+    line-height: 1.55em;
+    padding: 0 var(--space-4) var(--space-4);
+    margin: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .faq-layout { gap: 40px; }
+  }
+
+  @media (max-width: 767px) {
+    .faq-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.faq-item').forEach(item => {
+    const btn = item.querySelector<HTMLButtonElement>('.faq-btn')!;
+    const body = item.querySelector<HTMLElement>('.faq-body')!;
+    const icon = item.querySelector<SVGElement>('.faq-icon')!;
+
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+      document.querySelectorAll<HTMLElement>('.faq-item').forEach(el => {
+        el.querySelector<HTMLButtonElement>('.faq-btn')!.setAttribute('aria-expanded', 'false');
+        el.querySelector<HTMLElement>('.faq-body')!.style.maxHeight = '0';
+        el.querySelector<SVGElement>('.faq-icon')!.classList.remove('open');
+      });
+
+      if (!isOpen) {
+        btn.setAttribute('aria-expanded', 'true');
+        body.style.maxHeight = body.scrollHeight + 'px';
+        icon.classList.add('open');
+      }
+    });
+  });
+</script>

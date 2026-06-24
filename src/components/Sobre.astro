@@ -1,0 +1,375 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  photoSrc?: string;
+}
+
+// Sobre: bg #131314, pt=100px, pb=100px
+// Layout WP: esquerda = renatobignumbers + CRO + redes + bio + CTA
+//            direita  = label "Sobre o Dentista" + título 64px + experiências + foto
+const WA_LINK = "/whatsapp-website";
+const YOUTUBE_LINK = "https://www.youtube.com/@liegemilhioli1869";
+const { photoSrc = '/images/renatoprofissional.webp' } = Astro.props;
+
+const qualificacoes = [
+  'Somatic Voicework - The LoVetri™',
+  'Palestrante - Congresso Brasileiro de Fonodialogia',
+];
+
+const experienciasInternacionais = [
+  '🇺🇸 Somatic Voicework - The LoVetri™',
+];
+---
+
+<section id="sobre" class="sobre-section" data-section="sobre">
+  <div class="site-container">
+    <div class="sobre-grid">
+
+      <!-- COLUNA ESQUERDA: renatobignumbers + CRO + redes + bio + CTA -->
+      <div class="sobre-esq">
+
+        <div class="sobre-topo">
+          <img
+            src="/images/liege-credentials.webp"
+            alt=""
+            class="sobre-bignumbers"
+            aria-hidden="true"
+            data-element="1"
+            data-element-name="image"
+          />
+
+          <div class="sobre-cro-row">
+            <div class="sobre-cro-box">
+              <p class="cro-title" data-element="2" data-element-name="crm-cro">CRFa 6-9005</p>
+              <p class="cro-desc" data-element="3" data-element-name="name">Liege Mihioli</p>
+              <div class="sobre-redes">
+                <a
+                  href="https://www.instagram.com/liegemilhioli/reels/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  data-element="4"
+                  data-element-name="instagram"
+                >
+                  <Icon name="instagram" size={26} />
+                </a>
+                <a
+                  href={YOUTUBE_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="YouTube"
+                  data-element="5"
+                  data-element-name="youtube-primary"
+                >
+                  <Icon name="youtube" size={28} />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bio -->
+        <p class="sobre-bio" data-element="7" data-element-name="bio">
+          Liege Mihioli é fonoaudióloga em Vila Velha - ES, com atuação voltada à voz profissional,
+          performance vocal e comunicação. Seu trabalho une conhecimento musical, vivência artística
+          e técnica fonoaudiológica para orientar cantores que precisam sustentar uma rotina de ensaios,
+          gravações e shows com mais segurança.<br /><br />
+          No aprimoramento vocal para cantores, a avaliação considera desconfortos, resistência,
+          alcance, hábitos vocais, repertório e objetivos de palco. A proposta é construir um plano
+          personalizado para melhorar eficiência vocal sem prometer resultados padronizados.<br /><br />
+          Liege também atua com reabilitação vocal e aperfeiçoamento da voz falada para profissionais
+          que dependem da comunicação, como professores, advogados, médicos, palestrantes, políticos
+          e empresários.
+        </p>
+
+        <!-- CTA -->
+        <a href={WA_LINK} class="btn-cta" data-element="8" data-element-name="cta">
+          <span class="btn-icon-wrap">
+            <Icon name="whatsapp" size={21} />
+          </span>
+          Agendar consulta
+        </a>
+
+      </div>
+
+      <!-- COLUNA DIREITA: label + título 64px + experiências + foto -->
+      <div class="sobre-dir">
+
+        <!-- Image-box: label (16px, uppercase) + título (64px, 400, #FFFFFF) -->
+        <div class="sobre-titulo-box">
+          <p class="sobre-label" data-element="9" data-element-name="label">Sobre a profissional</p>
+          <h2 class="sobre-titulo" data-element="10" data-element-name="title">Liege Mihioli</h2>
+        </div>
+
+        <!-- Qualificações -->
+        <ul class="sobre-exp-list">
+          {qualificacoes.map((item, index) => (
+            <li class="sobre-exp-item">
+              <span class="sobre-exp-icon" aria-hidden="true">
+                <Icon name="graduation" size={29} strokeWidth={1.8} />
+              </span>
+              <span class="sobre-exp-texto" data-element={String(index + 11)} data-element-name={`qualification-${index + 1}`}>{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        <!-- Experiências internacionais -->
+        <ul class="sobre-exp-detalhes">
+          {experienciasInternacionais.map((item, index) => (
+            <li data-element={String(11 + qualificacoes.length + index)} data-element-name={`international-experience-${index + 1}`}>{item}</li>
+          ))}
+        </ul>
+
+        <!-- Foto principal -->
+        <div class="sobre-foto-wrap">
+          <img
+            src={photoSrc}
+            alt="Liege Mihioli — fonoaudióloga"
+            class="sobre-foto"
+            loading="lazy"
+            data-element="18"
+            data-element-name="photo"
+          />
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .sobre-section {
+    background-color: #131314;
+    padding-block: var(--section-space-md);
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .sobre-grid {
+    display: flex;
+    gap: var(--section-gap-lg);
+    align-items: flex-start;
+  }
+
+  /* ── Coluna esquerda ── */
+  .sobre-esq {
+    width: 49.2%;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: var(--section-space-md);
+  }
+
+  .sobre-topo {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-7);
+  }
+
+  .sobre-bignumbers {
+    width: 87px;
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  .sobre-cro-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0;
+    margin: 0;
+    padding-top: 6px;
+  }
+
+  .sobre-cro-box {
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .cro-title {
+    color: #CFD2D8;
+    font-size: var(--font-label);
+    font-weight: 600;
+    letter-spacing: 0.64px;
+    line-height: 1.2em;
+    margin: 0 0 8px;
+  }
+  .cro-desc {
+    color: #CFD2D8;
+    font-size: var(--font-body-lg);
+    font-weight: 400;
+    letter-spacing: 0.72px;
+    margin: 0;
+  }
+
+  .sobre-redes {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-shrink: 0;
+    margin-top: var(--space-4);
+  }
+  .sobre-redes a {
+    display: flex;
+    align-items: center;
+    color: #CFD2D8;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .sobre-redes a:hover {
+    color: #FFFFFF;
+  }
+  .sobre-redes a svg,
+  .sobre-redes a path {
+    color: currentColor;
+    fill: currentColor;
+  }
+
+  .sobre-bio {
+    color: #CFD2D8;
+    font-size: var(--font-body-lg);
+    font-weight: 400;
+    line-height: 1.55em;
+    margin: var(--space-10) 0;
+  }
+
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: var(--cta-gap);
+    background-color: #FFFFFF;
+    color: #1B1B1D;
+    border-radius: 32px;
+    padding: var(--cta-block) var(--cta-inline);
+    font-size: var(--font-cta);
+    font-weight: 600;
+    font-family: 'Manrope', sans-serif;
+    text-decoration: none;
+    transition: background-color 0.5s;
+    align-self: flex-start;
+  }
+  .btn-cta:hover { background-color: #E9E9E9; }
+  .btn-icon-wrap { display: flex; align-items: center; }
+
+  /* ── Coluna direita ── */
+  .sobre-dir {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    padding-left: 5px;
+  }
+
+  .sobre-titulo-box {
+    margin-bottom: var(--space-14);
+  }
+  .sobre-label {
+    color: #CFD2D8;
+    font-size: var(--font-label);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2.56px;
+    line-height: 1.5em;
+    margin: 0 0 var(--space-4);
+  }
+  .sobre-titulo {
+    color: #FFFFFF;
+    font-size: var(--font-section-title);
+    font-weight: var(--font-section-title-weight);
+    line-height: var(--font-section-title-line-height);
+    letter-spacing: var(--font-section-title-letter-spacing);
+    margin: 0;
+  }
+
+  /* Experiências */
+  .sobre-exp-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .sobre-exp-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding: var(--space-5) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    color: #E8E8EA;
+    font-size: var(--font-body-lg);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin: 0;
+  }
+  .sobre-exp-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #D7D8DC;
+    flex-shrink: 0;
+  }
+  .sobre-exp-texto {
+    flex: 1;
+    text-align: right;
+  }
+  .sobre-exp-detalhes {
+    list-style: none;
+    padding: var(--space-5) 0 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    color: #EDEDED;
+  }
+  .sobre-exp-detalhes li {
+    color: inherit;
+    font-size: var(--font-body);
+    font-weight: 400;
+    line-height: 1.55;
+  }
+
+  /* Foto */
+  .sobre-foto-wrap {
+    aspect-ratio: 160 / 111;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  .sobre-foto {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  @media (max-width: 1024px) {
+    .sobre-grid { flex-direction: column; gap: 48px; }
+    .sobre-esq { width: 100%; padding-bottom: 0; }
+    .sobre-topo { gap: 24px; }
+  }
+
+  @media (max-width: 767px) {
+    .sobre-topo { gap: 18px; }
+    .sobre-bignumbers { width: 76px; }
+    .sobre-cro-row { padding-top: 2px; }
+    .sobre-titulo-box { margin-bottom: 32px; }
+    .sobre-bio { font-size: var(--font-body); margin: 28px 0; }
+    .sobre-redes {
+      margin-top: 14px;
+    }
+    .sobre-exp-item {
+      padding: 18px 0;
+      font-size: var(--font-body);
+      gap: 16px;
+    }
+    .sobre-exp-detalhes {
+      padding-top: 16px;
+    }
+    .sobre-exp-detalhes li {
+      font-size: var(--font-nav);
+    }
+  }
+</style>

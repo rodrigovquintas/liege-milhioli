@@ -1,0 +1,82 @@
+---
+import {
+  ArrowUpRight,
+  BookOpen,
+  Camera,
+  ChevronDown,
+  GraduationCap,
+  Leaf,
+  MapPin,
+  Menu,
+  MessageCircle,
+  Phone,
+  Plane,
+  Play,
+  Send,
+  ShieldCheck,
+  Sparkles,
+  Users,
+} from '@lucide/astro';
+import { siInstagram, siTiktok, siUber, siWaze, siWhatsapp, siYoutube } from 'simple-icons';
+
+const {
+  name,
+  size = 24,
+  strokeWidth = 1.8,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const iconMap = {
+  'arrow-up-right': ArrowUpRight,
+  book: BookOpen,
+  camera: Camera,
+  'chevron-down': ChevronDown,
+  graduation: GraduationCap,
+  leaf: Leaf,
+  map: MapPin,
+  menu: Menu,
+  message: MessageCircle,
+  phone: Phone,
+  plane: Plane,
+  play: Play,
+  send: Send,
+  shield: ShieldCheck,
+  spark: Sparkles,
+  users: Users,
+};
+
+const brandMap = {
+  instagram: siInstagram,
+  tiktok: siTiktok,
+  uber: siUber,
+  waze: siWaze,
+  whatsapp: siWhatsapp,
+  youtube: siYoutube,
+};
+
+const LucideIcon = iconMap[name];
+const BrandIcon = brandMap[name];
+---
+
+{LucideIcon && (
+  <LucideIcon
+    size={size}
+    stroke-width={strokeWidth}
+    class={className}
+    {...rest}
+  />
+)}
+{BrandIcon && (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    class:list={['brand-icon', className]}
+    aria-hidden="true"
+    {...rest}
+  >
+    <path d={BrandIcon.path} />
+  </svg>
+)}

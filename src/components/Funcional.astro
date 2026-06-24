@@ -1,0 +1,450 @@
+---
+import Icon from './Icon.astro';
+
+interface Card {
+  titulo: string;
+  texto: string;
+  variant: string;
+}
+
+interface Props {
+  titleLines?: string[];
+  quote?: string;
+  imagePrimary?: string;
+  imageSecondary?: string;
+  cards?: Card[];
+}
+
+const WA_LINK = "/whatsapp-website";
+
+const defaultCards = [
+  {
+    titulo: 'O que é aprimoramento vocal?',
+    texto:
+      'É um acompanhamento fonoaudiológico voltado para melhorar eficiência, resistência e controle da voz cantada, respeitando a identidade vocal do artista.',
+    variant: 'outline',
+  },
+  {
+    titulo: 'Por que é necessário?',
+    texto:
+      'Porque a voz cantada exige resistência, controle e segurança para acompanhar ensaios, gravações e apresentações sem sobrecarga.',
+    variant: 'mid',
+  },
+  {
+    titulo: 'Quais ganhos terei?',
+    texto:
+      'Mais resistência, controle, alcance e confiança para cantar com menor esforço, preservando sua identidade vocal e sua performance.',
+    variant: 'light',
+  },
+];
+
+const {
+  titleLines = ['Aprimoramento vocal', 'para cantores', 'com plano individual'],
+  quote = '“A voz do cantor precisa responder à emoção, ao repertório e à agenda de shows sem perder cuidado técnico.”',
+  imagePrimary = '/images/liege-aprimoramento-vocal-consulta.webp',
+  imageSecondary = '/images/liege-aprimoramento-vocal-solucao.webp',
+  cards = defaultCards,
+} = Astro.props;
+
+const diferenciais = [
+  {
+    titulo: 'Conhecimento musical',
+    desc: 'A análise conecta técnica vocal, repertório e demanda artística para orientar escolhas aplicáveis ao palco.',
+    icon: 'users',
+  },
+  {
+    titulo: 'Vivência artística',
+    desc: 'O cuidado considera ensaios, gravações, shows e recuperação vocal entre apresentações.',
+    icon: 'shield',
+  },
+  {
+    titulo: 'Altamente resolutiva',
+    desc: 'A condução busca clareza sobre o que ajustar, como praticar e como proteger a voz em momentos de maior demanda.',
+    icon: 'spark',
+  },
+  {
+    titulo: 'Técnicas personalizadas',
+    desc: 'Os exercícios são definidos conforme avaliação, objetivo vocal e resposta individual ao treino.',
+    icon: 'leaf',
+  },
+];
+---
+
+<section id="funcional" class="funcional-section" data-section="funcional">
+  <div class="site-container">
+    <div class="funcional-top">
+      <div class="funcional-copy">
+        <h2 class="funcional-title" data-element="1" data-element-name="title">
+          {titleLines.map((line, index) => (
+            <>{line}{index < titleLines.length - 1 && <br />}</>
+          ))}
+        </h2>
+
+        <a href={WA_LINK} class="btn-cta" data-element="2" data-element-name="cta">
+          <span class="btn-icon-wrap">
+            <Icon name="whatsapp" size={21} />
+          </span>
+          Agendar consulta
+        </a>
+      </div>
+
+      <div class="funcional-quote">
+        <div class="funcional-quote-image-wrap">
+          <img
+            src={imagePrimary}
+            alt="Avaliação fonoaudiológica para voz cantada"
+            class="funcional-quote-image"
+            loading="lazy"
+            data-element="3"
+            data-element-name="image"
+          />
+        </div>
+        <div class="funcional-quote-box" data-element="4" data-element-name="quote">
+          <p class="funcional-quote-text">
+            {quote}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="funcional-cards">
+      {cards.map((card, index) => (
+        <article class={`funcional-card funcional-card-${card.variant}`}>
+          <h3 class="funcional-card-title" data-element={String(index * 2 + 5)} data-element-name={`card-title-${index + 1}`}>
+            {card.titulo}
+          </h3>
+          <p class="funcional-card-text" data-element={String(index * 2 + 6)} data-element-name={`card-text-${index + 1}`}>
+            {card.texto}
+          </p>
+        </article>
+      ))}
+    </div>
+
+    <div class="funcional-diferenciais">
+      <div class="funcional-diferenciais-image-wrap">
+        <img
+          src={imageSecondary}
+          alt="Planejamento vocal para cantores"
+          class="funcional-diferenciais-image"
+          loading="lazy"
+          data-element="11"
+          data-element-name="treatment-image"
+        />
+      </div>
+
+      <div class="funcional-diferenciais-list">
+        {diferenciais.map((item, index) => (
+          <article class="funcional-diferencial-item">
+            <div
+              class="funcional-diferencial-heading"
+              data-element={String(index * 3 + 12)}
+              data-element-name={`diferencial-heading-${index + 1}`}
+            >
+              <span class="funcional-diferencial-icon" data-icon={item.icon} aria-hidden="true">
+                <Icon name={item.icon} size={22} strokeWidth={1.8} />
+              </span>
+              <h3 class="funcional-diferencial-title">{item.titulo}</h3>
+            </div>
+
+            <p
+              class="funcional-diferencial-text"
+              data-element={String(index * 3 + 13)}
+              data-element-name={`diferencial-description-${index + 1}`}
+            >
+              {item.desc}
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .funcional-section {
+    background: #181818;
+    padding-block: clamp(4.75rem, 7vw, 6.75rem);
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .funcional-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(2rem, 4vw, 3.5rem);
+    align-items: start;
+    margin-bottom: clamp(2.5rem, 4vw, 4rem);
+  }
+
+  .funcional-copy {
+    padding-top: clamp(0.25rem, 1vw, 0.75rem);
+  }
+
+  .funcional-title {
+    color: #FFFFFF;
+    font-size: var(--font-section-title);
+    font-weight: var(--font-section-title-weight);
+    line-height: var(--font-section-title-line-height);
+    letter-spacing: var(--font-section-title-letter-spacing);
+    margin: 0 0 2rem;
+  }
+
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: var(--cta-gap);
+    background-color: #FFFFFF;
+    color: #1B1B1D;
+    border-radius: 999px;
+    padding: 1rem 1.45rem;
+    font-size: var(--font-cta);
+    font-weight: 600;
+    font-family: 'Manrope', sans-serif;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    align-self: flex-start;
+  }
+
+  .btn-cta:hover {
+    background-color: #ECECEC;
+  }
+
+  .btn-icon-wrap {
+    display: flex;
+    align-items: center;
+  }
+
+  .funcional-quote {
+    position: relative;
+    width: 100%;
+    max-width: 410px;
+    justify-self: end;
+    margin-top: 0.5rem;
+    overflow: hidden;
+  }
+
+  .funcional-quote-image-wrap {
+    overflow: hidden;
+  }
+
+  .funcional-quote-image {
+    width: 100%;
+    height: 254px;
+    display: block;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .funcional-quote-box {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.68);
+    color: #1B1B1D;
+    padding: 1.1rem 1.15rem 1.05rem;
+    backdrop-filter: blur(5px);
+  }
+
+  .funcional-quote .funcional-quote-text {
+    color: #1B1B1D;
+    font-size: 0.93rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .funcional-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .funcional-card {
+    min-height: 228px;
+    padding: 1.75rem 1.8rem 1.7rem;
+    border-radius: 8px;
+  }
+
+  .funcional-card-outline {
+    background: #222223;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .funcional-card-mid {
+    background: #2D2D2E;
+  }
+
+  .funcional-card-light {
+    background: #464648;
+  }
+
+  .funcional-card-title {
+    color: #FFFFFF;
+    font-size: var(--font-subsection-title);
+    font-weight: 400;
+    line-height: 1.08;
+    margin: 0 0 0.85rem;
+  }
+
+  .funcional-card-text {
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 1rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .funcional-diferenciais {
+    display: grid;
+    grid-template-columns: minmax(0, 620px) minmax(0, 440px);
+    gap: clamp(3rem, 5vw, 5.5rem);
+    align-items: center;
+    justify-content: space-between;
+    margin-top: clamp(4.5rem, 7vw, 6.5rem);
+  }
+
+  .funcional-diferenciais-image-wrap {
+    overflow: hidden;
+    width: 100%;
+    max-width: 620px;
+    aspect-ratio: 620 / 640;
+  }
+
+  .funcional-diferenciais-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .funcional-diferenciais-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    width: 100%;
+    max-width: 440px;
+  }
+
+  .funcional-diferencial-item {
+    color: #FFFFFF;
+  }
+
+  .funcional-diferencial-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.95rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .funcional-diferencial-icon {
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    flex: 0 0 auto;
+  }
+
+  .funcional-diferencial-title {
+    color: #FFFFFF;
+    font-size: var(--font-subsection-title);
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .funcional-diferencial-text {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 1rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .funcional-top {
+      grid-template-columns: 1fr;
+    }
+
+    .funcional-quote {
+      max-width: 520px;
+      justify-self: start;
+    }
+
+    .funcional-cards {
+      grid-template-columns: 1fr;
+    }
+
+    .funcional-card {
+      min-height: 0;
+    }
+
+    .funcional-diferenciais {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+      gap: 2.5rem;
+    }
+
+    .funcional-diferenciais-list {
+      max-width: none;
+    }
+
+    .funcional-diferencial-text {
+      max-width: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .funcional-section {
+      padding-block: 4rem;
+    }
+
+    .funcional-top {
+      gap: 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .funcional-title {
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-cta {
+      padding: 0.9rem 1.2rem;
+    }
+
+    .funcional-quote-image {
+      height: 230px;
+    }
+
+    .funcional-quote-box {
+      padding: 0.95rem 1rem 0.9rem;
+    }
+
+    .funcional-card {
+      padding: 1.4rem 1.35rem 1.35rem;
+      border-radius: 8px;
+    }
+
+    .funcional-diferenciais {
+      grid-template-columns: 1fr;
+      margin-top: 3rem;
+      gap: 2rem;
+    }
+
+    .funcional-diferenciais-image-wrap {
+      max-width: none;
+    }
+
+    .funcional-diferenciais-list {
+      gap: 1.55rem;
+    }
+
+    .funcional-diferencial-heading {
+      gap: 0.75rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .funcional-diferencial-text {
+      font-size: 0.95rem;
+    }
+  }
+</style>

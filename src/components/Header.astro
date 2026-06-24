@@ -1,0 +1,849 @@
+---
+import Icon from './Icon.astro';
+import { services } from '../content/services';
+
+const WA_LINK = "/whatsapp-website";
+
+const navLinks = [
+  { label: 'Liege Mihioli', href: '#sobre' },
+  { label: 'Depoimentos', href: '#depoimentos' },
+  { label: 'F.A.Q', href: '#faq' },
+  { label: 'Atendimento', href: '#a-clinica' },
+  { label: 'Contatos', href: '#contatos' },
+];
+
+const languages = [
+  { code: 'PT', value: 'pt', flag: '🇧🇷', label: 'Português' },
+  { code: 'EN', value: 'en', flag: '🇺🇸', label: 'English' },
+  { code: 'ES', value: 'es', flag: '🇪🇸', label: 'Español' },
+];
+---
+
+<header id="site-header" data-section="header">
+  <div class="header-shell">
+    <div class="header-inner">
+      <a href="/" class="header-logo" data-element="1" data-element-name="logo">
+        <img class="logo-mark" src="/images/liege-milhioli-logo-white.svg" alt="Liege Mihioli" width="56" height="56" />
+      </a>
+
+      <nav id="main-nav" data-element="2" data-element-name="menu-desktop">
+        <div class="nav-dropdown" data-services-dropdown>
+          <button
+            type="button"
+            class="nav-item nav-dropdown-trigger"
+            aria-expanded="false"
+            aria-controls="services-menu"
+          >
+            <span>Serviços</span>
+            <Icon name="chevron-down" class="nav-dropdown-chevron" size={15} strokeWidth={2} aria-hidden="true" />
+          </button>
+
+          <div id="services-menu" class="nav-dropdown-menu">
+            {services.map((service) => (
+              <a href={service.path} class="nav-dropdown-item">{service.title}</a>
+            ))}
+          </div>
+        </div>
+
+        {navLinks.map((link) => (
+          <a href={link.href} class="nav-item">{link.label}</a>
+        ))}
+      </nav>
+
+      <div class="header-right">
+        <a href={WA_LINK} class="btn-fale-conosco" data-element="3" data-element-name="cta-desktop">
+          Agendar consulta
+        </a>
+
+        <div class="lang-dropdown" data-lang-dropdown data-element="4" data-element-name="language-desktop">
+          <button
+            type="button"
+            class="lang-trigger"
+            aria-label="Selecionar idioma"
+            aria-expanded="false"
+            aria-controls="lang-menu"
+          >
+            <span class="lang-flag" aria-hidden="true">{languages[0].flag}</span>
+            <span class="lang-code">{languages[0].code}</span>
+            <Icon name="chevron-down" class="lang-chevron" size={16} strokeWidth={2} aria-hidden="true" />
+          </button>
+
+          <div id="lang-menu" class="lang-menu" role="menu">
+            {languages.map((language) => (
+              <a href="#" class="lang-option" role="menuitem" aria-label={language.label} data-language-switch={language.value}>
+                <span class="lang-flag" aria-hidden="true">{language.flag}</span>
+                <span class="lang-code">{language.code}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div class="mobile-header-actions">
+        <div class="mobile-lang-dropdown" data-mobile-lang-dropdown data-element="5" data-element-name="language-mobile">
+          <button
+            type="button"
+            class="mobile-current-lang"
+            aria-label={`Idioma atual: ${languages[0].label}`}
+            aria-expanded="false"
+            aria-controls="mobile-lang-menu"
+          >
+            {languages[0].flag}
+          </button>
+
+          <div id="mobile-lang-menu" class="mobile-lang-menu" role="menu">
+            {languages.map((language) => (
+              <a href="#" class="lang-option" role="menuitem" aria-label={language.label} data-language-switch={language.value}>
+                <span class="lang-flag" aria-hidden="true">{language.flag}</span>
+                <span class="lang-code">{language.code}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <button id="menu-toggle" aria-label="Abrir menu" data-element="6" data-element-name="menu-toggle-mobile">
+          <Icon name="menu" size={26} strokeWidth={2} aria-hidden="true" />
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-nav" data-element="7" data-element-name="menu-mobile">
+      <div class="mobile-services" data-mobile-services-dropdown>
+        <button
+          type="button"
+          class="mobile-nav-item mobile-services-trigger"
+          aria-expanded="false"
+          aria-controls="mobile-services-menu"
+        >
+          <span>Serviços</span>
+          <Icon name="chevron-down" class="mobile-services-chevron" size={18} strokeWidth={2} aria-hidden="true" />
+        </button>
+
+        <div id="mobile-services-menu" class="mobile-services-menu">
+          {services.map((service) => (
+            <a href={service.path} class="mobile-services-item">{service.title}</a>
+          ))}
+        </div>
+      </div>
+
+      {navLinks.map((link) => (
+        <a href={link.href} class="mobile-nav-item">{link.label}</a>
+      ))}
+      <a href={WA_LINK} class="btn-mobile-cta" data-element="8" data-element-name="cta-mobile">
+        Agendar consulta
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  #site-header {
+    position: fixed;
+    top: 10px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    box-sizing: border-box;
+    padding: 0 20px;
+    background: transparent;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .header-shell {
+    margin: 0 auto;
+    max-width: 1310px;
+    background: #242426;
+    border-radius: 44px;
+    box-shadow: none;
+    overflow: visible;
+    transition: border-radius 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+  }
+
+  .header-inner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(16px, 1.8vw, 28px);
+    min-height: 88px;
+    padding: 0 54px;
+    transition: min-height 0.22s ease, padding 0.22s ease, gap 0.22s ease;
+  }
+
+  .header-logo {
+    display: flex;
+    align-items: center;
+    width: 72px;
+    flex-shrink: 0;
+    transition: width 0.22s ease, transform 0.22s ease, opacity 0.22s ease;
+  }
+
+  .logo-mark {
+    display: block;
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    transition: width 0.22s ease, height 0.22s ease, filter 0.22s ease;
+  }
+
+  .header-logo:hover {
+    transform: translateY(-1px) scale(1.04);
+    opacity: 0.94;
+  }
+
+  .header-logo:hover .logo-mark {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.22));
+  }
+
+  #main-nav {
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(12px, 1vw, 18px);
+    flex: 0 1 auto;
+    justify-self: center;
+    min-width: 0;
+    transition: gap 0.22s ease;
+  }
+
+  .nav-item {
+    color: #ececee;
+    text-decoration: none;
+    font-size: var(--font-nav);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    padding: 10px clamp(8px, 0.75vw, 14px);
+    border-radius: 999px;
+    transition: color 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .nav-item:hover,
+  .nav-item.is-active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    opacity: 1;
+  }
+
+  .nav-dropdown {
+    position: relative;
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+  }
+
+  .nav-dropdown-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .nav-dropdown-chevron {
+    color: #ececee;
+    transition: transform 0.2s ease;
+  }
+
+  .nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    z-index: 1001;
+    display: none;
+    min-width: 278px;
+    padding: 8px;
+    background: #2b2b2d;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.22);
+    transform: translateX(-50%);
+  }
+
+  .nav-dropdown-menu::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    left: 0;
+    height: 10px;
+  }
+
+  .nav-dropdown.is-open .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu,
+  .nav-dropdown:hover .nav-dropdown-menu {
+    display: grid;
+    gap: 4px;
+  }
+
+  .nav-dropdown.is-open .nav-dropdown-chevron,
+  .nav-dropdown:focus-within .nav-dropdown-chevron,
+  .nav-dropdown:hover .nav-dropdown-chevron {
+    transform: rotate(180deg);
+  }
+
+  .nav-dropdown-item {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 10px;
+    color: #ececee;
+    text-decoration: none;
+    font-size: var(--font-body-sm);
+    line-height: 1.25;
+    transition: background-color 0.2s ease;
+  }
+
+  .nav-dropdown-item:hover,
+  .nav-dropdown-item.is-active {
+    background: rgba(255, 255, 255, 0.07);
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 1.4vw, 24px);
+    justify-self: end;
+    flex-shrink: 0;
+  }
+
+  .btn-fale-conosco {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 170px;
+    min-height: 46px;
+    padding: 0 28px;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 999px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: var(--font-body-sm);
+    font-weight: 600;
+    line-height: 1;
+    transition: background-color 0.2s ease, min-height 0.22s ease, min-width 0.22s ease, padding 0.22s ease;
+  }
+
+  .btn-fale-conosco:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .lang-dropdown {
+    position: relative;
+  }
+
+  .lang-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #e8e8ea;
+    cursor: pointer;
+    font: inherit;
+  }
+
+  .lang-flag {
+    font-size: var(--font-body-lg);
+    line-height: 1;
+  }
+
+  .lang-code {
+    font-size: var(--font-nav);
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .lang-chevron {
+    color: #e8e8ea;
+    transition: transform 0.2s ease;
+  }
+
+  .lang-menu {
+    position: absolute;
+    top: calc(100% + 14px);
+    right: 0;
+    display: none;
+    min-width: 128px;
+    z-index: 1001;
+    padding: 8px;
+    background: #2b2b2d;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.22);
+  }
+
+  .lang-dropdown.is-open .lang-menu,
+  .lang-dropdown:focus-within .lang-menu {
+    display: grid;
+    gap: 4px;
+  }
+
+  .lang-dropdown.is-open .lang-chevron,
+  .lang-dropdown:focus-within .lang-chevron {
+    transform: rotate(180deg);
+  }
+
+  .lang-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    color: #ececee;
+    text-decoration: none;
+  }
+
+  .lang-option:hover {
+    background: rgba(255, 255, 255, 0.07);
+  }
+
+  #menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #EDEDED;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .mobile-header-actions {
+    display: none;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .mobile-lang-dropdown {
+    position: relative;
+  }
+
+  .mobile-current-lang {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #e8e8ea;
+    cursor: pointer;
+    font-size: var(--font-body-lg);
+    line-height: 1;
+  }
+
+  .mobile-lang-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    display: none;
+    min-width: 132px;
+    padding: 8px;
+    background: #2b2b2d;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.22);
+    z-index: 1001;
+  }
+
+  .mobile-lang-dropdown.is-open .mobile-lang-menu,
+  .mobile-lang-dropdown:focus-within .mobile-lang-menu {
+    display: grid;
+    gap: 4px;
+  }
+
+  #mobile-nav {
+    display: none;
+    background: #242426;
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0 0 32px 32px;
+  }
+
+  .mobile-nav-item {
+    display: block;
+    width: 100%;
+    color: #EDEDED;
+    text-decoration: none;
+    font-size: var(--font-body);
+    font-weight: 400;
+    padding: 12px 0;
+    border-bottom: 1px solid #2D2D2E;
+  }
+
+  .mobile-nav-item:hover,
+  .mobile-nav-item.is-active {
+    opacity: 0.82;
+  }
+
+  .mobile-services-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    background: transparent;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  .mobile-services-chevron {
+    transition: transform 0.2s ease;
+  }
+
+  .mobile-services-menu {
+    display: none;
+    padding: 4px 0 8px 14px;
+    border-bottom: 1px solid #2D2D2E;
+  }
+
+  .mobile-services.is-open .mobile-services-menu {
+    display: grid;
+    gap: 2px;
+  }
+
+  .mobile-services.is-open .mobile-services-chevron {
+    transform: rotate(180deg);
+  }
+
+  .mobile-services-item {
+    display: block;
+    padding: 10px 0;
+    color: #CFD2D8;
+    text-decoration: none;
+    font-size: var(--font-body-sm);
+    line-height: 1.25;
+  }
+
+  .mobile-services-item:hover,
+  .mobile-services-item.is-active {
+    color: #ffffff;
+  }
+
+  .btn-mobile-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 16px;
+    background-color: transparent;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    border-radius: 32px;
+    font-size: var(--font-body-xs);
+    font-weight: 600;
+    padding: 12px 20px;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  @media (max-width: 1600px) {
+    .header-inner {
+      padding: 0 42px;
+      gap: clamp(14px, 1.4vw, 22px);
+    }
+
+    .header-logo {
+      width: 72px;
+    }
+
+    #main-nav {
+      gap: clamp(10px, 0.9vw, 18px);
+    }
+
+    .nav-item {
+      padding-right: clamp(7px, 0.65vw, 12px);
+      padding-left: clamp(7px, 0.65vw, 12px);
+    }
+
+    .btn-fale-conosco {
+      min-width: 170px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    #site-header {
+      padding: 0 18px;
+    }
+
+    .header-inner {
+      min-height: 76px;
+      padding: 0 28px;
+    }
+
+    .header-logo {
+      width: 64px;
+    }
+
+    .logo-mark {
+      width: 50px;
+      height: 50px;
+    }
+
+    #main-nav {
+      gap: 14px;
+    }
+
+    .btn-fale-conosco {
+      min-width: 150px;
+      min-height: 42px;
+      padding: 0 22px;
+      font-size: var(--font-body-xs);
+    }
+
+    .lang-flag {
+      font-size: var(--font-body);
+    }
+  }
+
+  @media (max-width: 1209px) {
+    .btn-fale-conosco {
+      display: none;
+    }
+  }
+
+  @media (max-width: 920px) {
+    #site-header {
+      top: 8px;
+      padding: 0 12px;
+    }
+
+    .header-shell {
+      border-radius: 32px;
+    }
+
+    .header-inner {
+      min-height: auto;
+      padding: 20px;
+    }
+
+    .header-logo {
+      width: 64px;
+    }
+
+    #main-nav,
+    .header-right {
+      display: none;
+    }
+
+    .mobile-header-actions {
+      display: flex;
+      grid-column: 3;
+      justify-self: end;
+    }
+
+    #menu-toggle {
+      display: block;
+    }
+  }
+
+  #site-header.is-condensed .header-shell {
+    border-radius: 36px;
+  }
+
+  #site-header.is-condensed .header-inner {
+    min-height: 72px;
+    padding: 0 46px;
+    gap: clamp(14px, 1.4vw, 22px);
+  }
+
+  #site-header.is-condensed .header-logo {
+    width: 62px;
+  }
+
+  #site-header.is-condensed .logo-mark {
+    width: 48px;
+    height: 48px;
+  }
+
+  #site-header.is-condensed #main-nav {
+    gap: clamp(10px, 0.9vw, 18px);
+  }
+
+  #site-header.is-condensed .btn-fale-conosco {
+    min-width: 160px;
+    min-height: 40px;
+    padding: 0 24px;
+  }
+
+  @media (max-width: 1024px) {
+    #site-header.is-condensed .header-inner {
+      min-height: 70px;
+      padding: 0 24px;
+      gap: 20px;
+    }
+
+    #site-header.is-condensed .header-logo {
+      width: 58px;
+    }
+
+    #site-header.is-condensed #main-nav {
+      gap: 14px;
+    }
+
+    #site-header.is-condensed .btn-fale-conosco {
+      min-width: 142px;
+      min-height: 38px;
+      padding: 0 20px;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+  const siteHeader = document.getElementById('site-header');
+  const servicesDropdown = document.querySelector('[data-services-dropdown]');
+  const servicesTrigger = servicesDropdown?.querySelector('.nav-dropdown-trigger');
+  const mobileServicesDropdown = document.querySelector('[data-mobile-services-dropdown]');
+  const mobileServicesTrigger = mobileServicesDropdown?.querySelector('.mobile-services-trigger');
+  const langDropdown = document.querySelector('[data-lang-dropdown]');
+  const langTrigger = langDropdown?.querySelector('.lang-trigger');
+  const mobileLangDropdown = document.querySelector('[data-mobile-lang-dropdown]');
+  const mobileLangTrigger = mobileLangDropdown?.querySelector('.mobile-current-lang');
+  const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+  const serviceLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-dropdown-item, .mobile-services-item');
+  const sectionNavLinks = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>('#main-nav a.nav-item[href^="#"], #mobile-nav a.mobile-nav-item[href^="#"]')
+  );
+  const sectionTargets = Array.from(
+    new Set(sectionNavLinks.map((link) => link.getAttribute('href')?.slice(1)).filter(Boolean))
+  )
+    .map((id) => document.getElementById(id!))
+    .filter((section): section is HTMLElement => Boolean(section));
+  const servicesSection = document.querySelector<HTMLElement>('[data-section="cirurgia-tratamento-complementares-cards"]');
+  if (servicesSection && !sectionTargets.includes(servicesSection)) {
+    sectionTargets.push(servicesSection);
+  }
+  let headerScrollTicking = false;
+
+  const setActiveNavLink = (activeId: string | null) => {
+    const isServicesActive = activeId === 'cirurgia-tratamento-complementares-cards';
+    servicesTrigger?.classList.toggle('is-active', isServicesActive);
+    if (isServicesActive) {
+      servicesTrigger?.setAttribute('aria-current', 'location');
+    } else {
+      servicesTrigger?.removeAttribute('aria-current');
+    }
+
+    sectionNavLinks.forEach((link) => {
+      const isActive = activeId ? link.getAttribute('href') === `#${activeId}` : false;
+      link.classList.toggle('is-active', isActive);
+      if (isActive) {
+        link.setAttribute('aria-current', 'location');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  };
+
+  const syncServiceNavState = () => {
+    serviceLinks.forEach((link) => {
+      const linkPath = new URL(link.href, window.location.href).pathname.replace(/\/$/, '') || '/';
+      const isActive = linkPath === currentPath;
+      link.classList.toggle('is-active', isActive);
+      if (isActive) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  };
+
+  const syncSectionNavState = () => {
+    const marker = Math.round(window.innerHeight * 0.36);
+    let activeSection: HTMLElement | null = null;
+    let closestPastSection: HTMLElement | null = null;
+
+    sectionTargets.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+
+      if (rect.top <= marker && rect.bottom >= marker) {
+        activeSection = section;
+        return;
+      }
+
+      if (rect.top <= marker) {
+        closestPastSection = section;
+      }
+    });
+
+    setActiveNavLink((activeSection || closestPastSection)?.id || null);
+  };
+
+  const syncHeaderState = () => {
+    siteHeader?.classList.toggle('is-condensed', window.scrollY > 40);
+    syncSectionNavState();
+    headerScrollTicking = false;
+  };
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = mobileNav!.style.display === 'block';
+    mobileNav!.style.display = isOpen ? 'none' : 'block';
+  });
+
+  document.querySelectorAll('#mobile-nav a').forEach((anchor) => {
+    anchor.addEventListener('click', () => {
+      mobileNav!.style.display = 'none';
+      mobileServicesDropdown?.classList.remove('is-open');
+      mobileServicesTrigger?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  servicesTrigger?.addEventListener('click', () => {
+    const isOpen = servicesDropdown?.classList.toggle('is-open');
+    servicesTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  mobileServicesTrigger?.addEventListener('click', () => {
+    const isOpen = mobileServicesDropdown?.classList.toggle('is-open');
+    mobileServicesTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  langTrigger?.addEventListener('click', () => {
+    const isOpen = langDropdown?.classList.toggle('is-open');
+    langTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  mobileLangTrigger?.addEventListener('click', () => {
+    const isOpen = mobileLangDropdown?.classList.toggle('is-open');
+    mobileLangTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!servicesDropdown || !servicesDropdown.contains(event.target as Node)) {
+      servicesDropdown.classList.remove('is-open');
+      servicesTrigger?.setAttribute('aria-expanded', 'false');
+    }
+
+    if (!mobileServicesDropdown || !mobileServicesDropdown.contains(event.target as Node)) {
+      mobileServicesDropdown.classList.remove('is-open');
+      mobileServicesTrigger?.setAttribute('aria-expanded', 'false');
+    }
+
+    if (!langDropdown || !langDropdown.contains(event.target as Node)) {
+      langDropdown.classList.remove('is-open');
+      langTrigger?.setAttribute('aria-expanded', 'false');
+    }
+
+    if (!mobileLangDropdown || !mobileLangDropdown.contains(event.target as Node)) {
+      mobileLangDropdown.classList.remove('is-open');
+      mobileLangTrigger?.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  window.addEventListener('scroll', () => {
+    if (headerScrollTicking) return;
+    headerScrollTicking = true;
+    window.requestAnimationFrame(syncHeaderState);
+  }, { passive: true });
+
+  syncServiceNavState();
+  syncHeaderState();
+</script>
