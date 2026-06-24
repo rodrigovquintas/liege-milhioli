@@ -1,4 +1,47 @@
-export type ServiceSlug = 'aprimoramento-vocal' | 'reabilitacao-vocal' | 'voz-falada';
+export type ServiceSlug = 'home' | 'aprimoramento-vocal' | 'reabilitacao-vocal' | 'voz-falada';
+
+const homeService = {
+  slug: 'home',
+  path: '/',
+  title: 'Aprimoramento Vocal para Cantores',
+  pageTitle: 'Liege Milhioli | Aprimoramento Vocal para Cantores em Vila Velha',
+  metaDescription: 'Aprimoramento vocal para cantores com Liege Milhioli, fonoaudióloga em Vila Velha - ES, com foco em resistência vocal, alcance, saúde da voz e performance para shows.',
+  heroTitle: 'Fonoaudiologia\navançada para\nprofissionais',
+  heroImage: '/images/hero-home-fonoaudiologia-avancada.webp',
+  heroMobileImage: '/images/hero-home-fonoaudiologia-avancada-mobile.webp',
+  aboutPhoto: '/images/sobre-aprimoramento-profissional.webp',
+  introTitle: ['Aprimoramento vocal', 'para cantores', 'com plano individual'],
+  quote: '“A voz do cantor precisa responder à emoção, ao repertório e à agenda de shows sem perder cuidado técnico.”',
+  imagePrimary: '/images/liege-aprimoramento-funcional-image.webp',
+  imageSecondary: '/images/liege-aprimoramento-funcional-treatment.webp',
+  cardImage: '/images/liege-aprimoramento-vocal-estudio.webp',
+  cardAlt: 'Aprimoramento vocal para cantores profissionais',
+  cardText: 'Plano para resistência, alcance e performance de cantores em rotina de shows, ensaios e gravações.',
+  cards: [
+    {
+      titulo: 'O que é aprimoramento vocal?',
+      texto: 'É um acompanhamento fonoaudiológico voltado para melhorar eficiência, resistência e controle da voz cantada, respeitando a identidade vocal do artista.',
+      variant: 'outline',
+    },
+    {
+      titulo: 'Por que é necessário?',
+      texto: 'Porque a voz cantada exige resistência, controle e segurança para acompanhar ensaios, gravações e apresentações sem sobrecarga.',
+      variant: 'mid',
+    },
+    {
+      titulo: 'Quais ganhos terei?',
+      texto: 'Mais resistência, controle, alcance e confiança para cantar com menor esforço, preservando sua identidade vocal e sua performance.',
+      variant: 'light',
+    },
+  ],
+  faqs: [
+    ['Aprimoramento vocal é apenas para quem tem lesão?', 'Não. Cantores podem procurar acompanhamento mesmo sem lesão, especialmente quando desejam cantar por mais tempo, ampliar recursos técnicos ou lidar melhor com uma rotina intensa de shows.'],
+    ['Esse trabalho substitui aula de canto?', 'Não. A fonoaudiologia vocal complementa a formação artística ao cuidar de eficiência, saúde, resistência e ajustes funcionais da voz.'],
+    ['É possível ampliar alcance vocal com segurança?', 'A evolução depende da avaliação individual, da prática orientada e dos hábitos vocais. O foco é buscar ganho técnico sem sobrecarga e sem promessa de resultado padronizado.'],
+    ['O acompanhamento ajuda em períodos de shows?', 'Sim. O plano pode organizar aquecimento, desaquecimento, recuperação vocal, manejo de esforço e estratégias para sustentar a demanda de apresentações.'],
+    ['Quem trabalha com voz falada também pode ser atendido?', 'Sim. Além de cantores, o atendimento contempla professores, advogados, médicos, palestrantes, políticos, empresários e outros profissionais que dependem da comunicação.'],
+  ],
+} as const;
 
 export const services = [
   {
@@ -45,7 +88,7 @@ export const services = [
   },
   {
     slug: 'aprimoramento-vocal',
-    path: '/',
+    path: '/aprimoramento-vocal',
     title: 'Aprimoramento Vocal para Cantores',
     pageTitle: 'Liege Milhioli | Aprimoramento Vocal para Cantores em Vila Velha',
     metaDescription: 'Aprimoramento vocal para cantores com Liege Milhioli, fonoaudióloga em Vila Velha - ES, com foco em resistência vocal, alcance, saúde da voz e performance para shows.',
@@ -129,7 +172,9 @@ export const services = [
   },
 ] as const;
 
-export type Service = (typeof services)[number];
+const allServices = [homeService, ...services] as const;
 
-export const getService = (slug: ServiceSlug) => services.find((service) => service.slug === slug)!;
+export type Service = (typeof allServices)[number];
+
+export const getService = (slug: ServiceSlug) => allServices.find((service) => service.slug === slug)!;
 export const getRelatedServices = (slug: ServiceSlug) => services.filter((service) => service.slug !== slug);

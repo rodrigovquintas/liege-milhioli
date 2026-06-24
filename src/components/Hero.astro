@@ -13,6 +13,7 @@ const {
   heroMobileImage = heroImage,
 } = Astro.props;
 const WA_LINK = "/whatsapp-website";
+const titleLines = title.split('\n');
 ---
 
 <section
@@ -27,7 +28,14 @@ const WA_LINK = "/whatsapp-website";
     <p class="hero-label" data-element="1" data-element-name="label">LIEGE MILHIOLI | FONOAUDIÓLOGA</p>
 
     <!-- Big title: 64px, 400, #FFFFFF -->
-    <h1 class="hero-title" data-element="2" data-element-name="title">{title}</h1>
+    <h1 class="hero-title" data-element="2" data-element-name="title">
+      {titleLines.map((line, index) => (
+        <>
+          {index > 0 && <br />}
+          {line}
+        </>
+      ))}
+    </h1>
 
     <!-- CTA: bg #FFFFFF, color #1B1B1D, border-radius 32px, icon right -->
     <a href={WA_LINK} class="btn-cta" data-element="3" data-element-name="cta">

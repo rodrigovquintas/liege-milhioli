@@ -66,13 +66,15 @@ const jsonLd = {
   <main>
     <Hero title={service.heroTitle} heroImage={service.heroImage} heroMobileImage={service.heroMobileImage} />
     <BigNumbers />
-    <Funcional
-      titleLines={service.introTitle}
-      quote={service.quote}
-      imagePrimary={service.imagePrimary}
-      imageSecondary={service.imageSecondary}
-      cards={service.cards}
-    />
+    {service.slug !== 'home' && (
+      <Funcional
+        titleLines={service.introTitle}
+        quote={service.quote}
+        imagePrimary={service.imagePrimary}
+        imageSecondary={service.imageSecondary}
+        cards={service.cards}
+      />
+    )}
     <CirurgiaTratamento2 currentSlug={service.slug} />
     <Sobre photoSrc={service.aboutPhoto} />
     <Depoimentos />
