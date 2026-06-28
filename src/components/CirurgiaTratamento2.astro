@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { currentSlug = 'aprimoramento-vocal' } = Astro.props;
-const tratamentos = services.map((service) => ({
+const tratamentos = services.filter((service) => service.slug !== currentSlug).map((service) => ({
   slug: service.slug,
   titulo: service.title,
   texto: service.cardText,

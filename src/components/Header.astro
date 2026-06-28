@@ -761,18 +761,18 @@ const languages = [
     let activeSection: HTMLElement | null = null;
     let closestPastSection: HTMLElement | null = null;
 
-    sectionTargets.forEach((section) => {
+    for (const section of sectionTargets) {
       const rect = section.getBoundingClientRect();
 
       if (rect.top <= marker && rect.bottom >= marker) {
         activeSection = section;
-        return;
+        break;
       }
 
       if (rect.top <= marker) {
         closestPastSection = section;
       }
-    });
+    }
 
     setActiveNavLink((activeSection || closestPastSection)?.id || null);
   };
@@ -817,22 +817,22 @@ const languages = [
   });
 
   document.addEventListener('click', (event) => {
-    if (!servicesDropdown || !servicesDropdown.contains(event.target as Node)) {
+    if (servicesDropdown && !servicesDropdown.contains(event.target as Node)) {
       servicesDropdown.classList.remove('is-open');
       servicesTrigger?.setAttribute('aria-expanded', 'false');
     }
 
-    if (!mobileServicesDropdown || !mobileServicesDropdown.contains(event.target as Node)) {
+    if (mobileServicesDropdown && !mobileServicesDropdown.contains(event.target as Node)) {
       mobileServicesDropdown.classList.remove('is-open');
       mobileServicesTrigger?.setAttribute('aria-expanded', 'false');
     }
 
-    if (!langDropdown || !langDropdown.contains(event.target as Node)) {
+    if (langDropdown && !langDropdown.contains(event.target as Node)) {
       langDropdown.classList.remove('is-open');
       langTrigger?.setAttribute('aria-expanded', 'false');
     }
 
-    if (!mobileLangDropdown || !mobileLangDropdown.contains(event.target as Node)) {
+    if (mobileLangDropdown && !mobileLangDropdown.contains(event.target as Node)) {
       mobileLangDropdown.classList.remove('is-open');
       mobileLangTrigger?.setAttribute('aria-expanded', 'false');
     }

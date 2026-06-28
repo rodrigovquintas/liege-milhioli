@@ -8,11 +8,11 @@ interface Card {
 }
 
 interface Props {
-  titleLines?: string[];
+  titleLines?: readonly string[];
   quote?: string;
   imagePrimary?: string;
   imageSecondary?: string;
-  cards?: Card[];
+  cards?: readonly Card[];
 }
 
 const WA_LINK = "/whatsapp-website";

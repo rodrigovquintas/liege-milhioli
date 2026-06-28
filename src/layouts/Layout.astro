@@ -61,21 +61,6 @@ const SHOW_ELEMENT_BADGES = false;
         es: { htmlLang: 'es', locale: 'es_ES', flag: '🇪🇸', code: 'ES', label: 'Español' },
       };
 
-      const landingMeta: Record<LanguageCode, { title: string; description: string }> = {
-        pt: {
-          title: 'Liege Milhioli | Aprimoramento Vocal para Cantores em Vila Velha',
-          description: 'Aprimoramento vocal para cantores com Liege Milhioli, fonoaudióloga em Vila Velha - ES, com foco em resistência vocal, alcance, saúde da voz e performance para shows.',
-        },
-        en: {
-          title: 'Liege Milhioli | Vocal Improvement for Singers in Vila Velha',
-          description: 'Vocal improvement for singers with Liege Milhioli, speech therapist in Vila Velha, focused on vocal endurance, range, vocal health and performance.',
-        },
-        es: {
-          title: 'Liege Milhioli | Perfeccionamiento Vocal para Cantantes en Vila Velha',
-          description: 'Perfeccionamiento vocal para cantantes con Liege Milhioli, fonoaudióloga en Vila Velha, con foco en resistencia vocal, alcance, salud vocal y performance.',
-        },
-      };
-
       const linksMeta: Record<LanguageCode, { title: string; description: string }> = {
         pt: {
           title: 'Links | Liege Milhioli',
@@ -375,7 +360,7 @@ const SHOW_ELEMENT_BADGES = false;
           option.addEventListener('click', (event) => {
             event.preventDefault();
             const language = option.dataset.languageSwitch;
-            if (isValidLanguage(language)) setLandingLanguage(language);
+            if (language && isValidLanguage(language)) setLandingLanguage(language);
             option.closest('.lang-dropdown, .mobile-lang-dropdown')?.classList.remove('is-open');
           });
         });
@@ -482,7 +467,8 @@ const SHOW_ELEMENT_BADGES = false;
           textarea.style.opacity = '0';
           document.body.appendChild(textarea);
           textarea.select();
-          document.execCommand('copy');
+          const legacyDocument = document as unknown as { execCommand?: (commandId: string) => boolean };
+          legacyDocument.execCommand?.('copy');
           textarea.remove();
         };
 

@@ -16,8 +16,17 @@ import {
   ShieldCheck,
   Sparkles,
   Users,
-} from '@lucide/astro';
+} from 'lucide';
+import type { IconNode } from 'lucide';
 import { siInstagram, siTiktok, siUber, siWaze, siWhatsapp, siYoutube } from 'simple-icons';
+import type { SimpleIcon } from 'simple-icons';
+
+interface Props {
+  name: keyof typeof iconMap | keyof typeof brandMap;
+  size?: number;
+  strokeWidth?: number;
+  class?: string;
+}
 
 const {
   name,
@@ -25,9 +34,9 @@ const {
   strokeWidth = 1.8,
   class: className,
   ...rest
-} = Astro.props;
+} = Astro.props as Props;
 
-const iconMap = {
+const iconMap: Record<string, IconNode> = {
   'arrow-up-right': ArrowUpRight,
   book: BookOpen,
   camera: Camera,
@@ -46,7 +55,7 @@ const iconMap = {
   users: Users,
 };
 
-const brandMap = {
+const brandMap: Record<string, SimpleIcon> = {
   instagram: siInstagram,
   tiktok: siTiktok,
   uber: siUber,
@@ -60,12 +69,21 @@ const BrandIcon = brandMap[name];
 ---
 
 {LucideIcon && (
-  <LucideIcon
-    size={size}
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
     stroke-width={strokeWidth}
+    stroke-linecap="round"
+    stroke-linejoin="round"
     class={className}
+    aria-hidden="true"
     {...rest}
-  />
+  >
+    {LucideIcon.map(([Tag, attrs]: IconNode[number]) => <Tag {...attrs} />)}
+  </svg>
 )}
 {BrandIcon && (
   <svg
