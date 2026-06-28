@@ -369,26 +369,6 @@ const SHOW_ELEMENT_BADGES = false;
       });
     </script>
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const dropdowns = document.querySelectorAll<HTMLElement>('[data-lang-dropdown], [data-mobile-lang-dropdown]');
-        dropdowns.forEach((dropdown) => {
-          const trigger = dropdown.querySelector<HTMLButtonElement>('button');
-          trigger?.addEventListener('click', () => {
-            const isOpen = dropdown.classList.toggle('is-open');
-            trigger.setAttribute('aria-expanded', String(isOpen));
-          });
-        });
-        document.addEventListener('click', (event) => {
-          dropdowns.forEach((dropdown) => {
-            if (!dropdown.contains(event.target as Node)) {
-              dropdown.classList.remove('is-open');
-              dropdown.querySelector('button')?.setAttribute('aria-expanded', 'false');
-            }
-          });
-        });
-      });
-    </script>
-    <script>
       (() => {
         const MIN_LOADING_MS = 500;
 

@@ -17,6 +17,7 @@ interface Props {
 }
 
 const { service } = Astro.props;
+const showFaq = service.slug !== 'home';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -48,15 +49,19 @@ const jsonLd = {
       areaServed: 'Vila Velha - ES',
       description: service.metaDescription,
     },
-    {
-      '@type': 'FAQPage',
-      '@id': '#faq',
-      mainEntity: service.faqs.slice(0, 3).map(([pergunta, resposta]) => ({
-        '@type': 'Question',
-        name: pergunta,
-        acceptedAnswer: { '@type': 'Answer', text: resposta },
-      })),
-    },
+    ...(showFaq
+      ? [
+          {
+            '@type': 'FAQPage',
+            '@id': '#faq',
+            mainEntity: service.faqs.slice(0, 3).map(([pergunta, resposta]) => ({
+              '@type': 'Question',
+              name: pergunta,
+              acceptedAnswer: { '@type': 'Answer', text: resposta },
+            })),
+          },
+        ]
+      : []),
   ],
 };
 ---
@@ -78,7 +83,7 @@ const jsonLd = {
     <CirurgiaTratamento2 currentSlug={service.slug} />
     <Sobre photoSrc={service.aboutPhoto} />
     <Depoimentos />
-    <FAQ faqs={service.faqs.map(([pergunta, resposta]) => ({ pergunta, resposta }))} />
+    {showFaq && <FAQ faqs={service.faqs.map(([pergunta, resposta]) => ({ pergunta, resposta }))} />}
     <AClinica />
   </main>
   <Footer />
