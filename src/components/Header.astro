@@ -441,7 +441,7 @@ const languages = [
 
   .mobile-lang-menu {
     position: absolute;
-    top: calc(100% + 12px);
+    top: calc(100% + var(--mobile-lang-menu-offset, 12px));
     right: 0;
     display: none;
     min-width: 132px;
@@ -639,6 +639,10 @@ const languages = [
       justify-self: end;
     }
 
+    .mobile-lang-menu {
+      --mobile-lang-menu-offset: 43px;
+    }
+
     #menu-toggle {
       display: block;
     }
@@ -692,6 +696,10 @@ const languages = [
       min-width: 142px;
       min-height: 38px;
       padding: 0 20px;
+    }
+
+    #site-header.is-condensed .mobile-lang-menu {
+      --mobile-lang-menu-offset: 33px;
     }
   }
 </style>

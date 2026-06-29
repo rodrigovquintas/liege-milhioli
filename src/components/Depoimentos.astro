@@ -104,7 +104,7 @@ const chunks = Array.from({ length: Math.ceil(depoimentos.length / 6) }, (_, ind
       <h2 class="dep-title" data-element="2" data-element-name="title">Trajetória construída com voz, técnica e performance</h2>
     </div>
 
-    <div class="swiper depoimentos-swiper">
+    <div class="swiper depoimentos-swiper depoimentos-swiper-desktop">
       <div class="swiper-wrapper">
         {chunks.map((group, groupIndex) => (
           <div class="swiper-slide">
@@ -136,20 +136,55 @@ const chunks = Array.from({ length: Math.ceil(depoimentos.length / 6) }, (_, ind
         <div class="swiper-pagination dep-pagination" data-element="21" data-element-name="pagination"></div>
       </div>
     </div>
+
+    <div class="swiper depoimentos-swiper depoimentos-swiper-mobile">
+      <div class="swiper-wrapper">
+        {depoimentos.map((dep, depIndex) => (
+          <div class="swiper-slide">
+            <article
+              class="dep-card"
+              data-element={String(depIndex + 3)}
+              data-element-name={`review-card-${depIndex + 1}`}
+            >
+              <div class="dep-stars" aria-label="Avaliação 5.0 de 5">
+                <span class="dep-score">5.0</span>
+                <span class="dep-stars-text">★★★★★</span>
+              </div>
+              <div class="dep-card-body">
+                <p class="dep-texto">{dep.texto}</p>
+              </div>
+              <div class="dep-card-footer">
+                <p class="dep-nome">{dep.nome}</p>
+                <p class="dep-google">{dep.fonte ?? 'Avaliação pública extraída do Google'}</p>
+              </div>
+            </article>
+          </div>
+        ))}
+      </div>
+      <div class="dep-controls">
+        <button class="dep-nav-button dep-nav-prev" type="button" aria-label="Depoimento anterior" data-element="21" data-element-name="previous-review">
+          <span aria-hidden="true">‹</span>
+        </button>
+        <button class="dep-nav-button dep-nav-next" type="button" aria-label="Próximo depoimento" data-element="22" data-element-name="next-review">
+          <span aria-hidden="true">›</span>
+        </button>
+      </div>
+    </div>
   </div>
 </section>
 
 <script>
   import 'swiper/css';
   import 'swiper/css/pagination';
+  import 'swiper/css/navigation';
 </script>
 
 <script>
   import Swiper from 'swiper';
-  import { Pagination, Autoplay } from 'swiper/modules';
+  import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 
   document.addEventListener('DOMContentLoaded', () => {
-    const swiper = new Swiper('.depoimentos-swiper', {
+    const createDepoimentosSwiper = (selector: string) => new Swiper(selector, {
       modules: [Pagination, Autoplay],
       slidesPerView: 1,
       spaceBetween: 32,
@@ -160,12 +195,37 @@ const chunks = Array.from({ length: Math.ceil(depoimentos.length / 6) }, (_, ind
         pauseOnMouseEnter: true,
         waitForTransition: true,
       },
-      pagination: { el: '.dep-pagination', clickable: true },
+      pagination: { el: `${selector} .dep-pagination`, clickable: true },
+    });
+
+    const desktopSwiper = createDepoimentosSwiper('.depoimentos-swiper-desktop');
+    const mobileSwiper = new Swiper('.depoimentos-swiper-mobile', {
+      modules: [Navigation, Autoplay],
+      slidesPerView: 1,
+      spaceBetween: 32,
+      autoHeight: true,
+      loop: false,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+        waitForTransition: true,
+      },
+      navigation: {
+        prevEl: '.depoimentos-swiper-mobile .dep-nav-prev',
+        nextEl: '.depoimentos-swiper-mobile .dep-nav-next',
+      },
     });
 
     const cards = document.querySelectorAll('#depoimentos .dep-card');
-    const pause = () => swiper.autoplay?.pause();
-    const resume = () => swiper.autoplay?.resume();
+    const pause = () => {
+      desktopSwiper.autoplay?.pause();
+      mobileSwiper.autoplay?.pause();
+    };
+    const resume = () => {
+      desktopSwiper.autoplay?.resume();
+      mobileSwiper.autoplay?.resume();
+    };
 
     cards.forEach((card) => {
       card.addEventListener('mouseenter', pause);
@@ -216,6 +276,10 @@ const chunks = Array.from({ length: Math.ceil(depoimentos.length / 6) }, (_, ind
     padding: 0 0 clamp(3.5rem, 6vw, 4.375rem);
     --swiper-theme-color: #b8bcc2;
     --swiper-pagination-color: #b8bcc2;
+  }
+
+  .depoimentos-swiper-mobile {
+    display: none;
   }
 
   .swiper-slide {
@@ -343,6 +407,39 @@ const chunks = Array.from({ length: Math.ceil(depoimentos.length / 6) }, (_, ind
     background-color: #c8ccd2 !important;
   }
 
+  .dep-nav-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    background: #242426;
+    color: #FFFFFF;
+    cursor: pointer;
+    line-height: 1;
+    transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .dep-nav-button span {
+    display: block;
+    font-size: 2rem;
+    line-height: 0.8;
+    transform: translateY(-1px);
+  }
+
+  .dep-nav-button:hover,
+  .dep-nav-button:focus-visible {
+    background: #2D2D2E;
+    border-color: rgba(255, 255, 255, 0.34);
+  }
+
+  .dep-nav-button:global(.swiper-button-disabled) {
+    cursor: default;
+    opacity: 0.38;
+  }
+
   @media (max-width: 1024px) {
     .depoimentos-swiper { padding: 0 0 64px; }
     .dep-slide-grid {
@@ -353,12 +450,29 @@ const chunks = Array.from({ length: Math.ceil(depoimentos.length / 6) }, (_, ind
   }
 
   @media (max-width: 767px) {
-    .dep-header { padding: 0; }
-    .depoimentos-swiper { padding: 0 0 56px; }
-    .dep-slide-grid {
-      grid-template-columns: 1fr;
-      gap: 24px;
+    .dep-section {
+      padding-bottom: clamp(2rem, 10vw, 3rem);
     }
-    .dep-controls { margin-top: 32px; }
+
+    .dep-header { padding: 0; }
+
+    .depoimentos-swiper-desktop {
+      display: none;
+    }
+
+    .depoimentos-swiper-mobile {
+      display: block;
+      padding: 0;
+    }
+
+    .depoimentos-swiper-mobile .dep-controls {
+      justify-content: space-between;
+      margin-top: 12px;
+    }
+
+    .depoimentos-swiper-mobile .dep-nav-button {
+      width: 42px;
+      height: 42px;
+    }
   }
 </style>

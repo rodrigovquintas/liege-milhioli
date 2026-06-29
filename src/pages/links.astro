@@ -291,7 +291,7 @@ const treatmentLabels: Record<LanguageCode, Record<LinkServiceSlug, string>> = {
     });
 
     const params = new URLSearchParams(window.location.search);
-    const initialLanguage = params.get('lang') || window.localStorage.getItem('landingLanguage');
+    const initialLanguage = params.get('lang');
     if (initialLanguage && ['pt', 'en', 'es'].includes(initialLanguage)) {
       selectLanguage(initialLanguage);
     }
